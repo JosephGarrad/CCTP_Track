@@ -156,8 +156,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   XSize: 60
   ZSize: 60
-  HeightAcrossX: 0.2
-  HeightAcrossZ: 0.2
+  HeightAcrossX: 0.1
+  HeightAcrossZ: 0.1
   multiplyHeight: 2
 --- !u!23 &289922952
 MeshRenderer:

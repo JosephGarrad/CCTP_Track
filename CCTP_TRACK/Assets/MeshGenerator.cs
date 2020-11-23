@@ -5,13 +5,16 @@ using UnityEngine;
 public class MeshGenerator : MonoBehaviour
 {
     Mesh LandMesh;
-
     Vector3[] vertices;
     int[] triangles;
+
+
     [Header("Size of Terrain:")]
+
     public int XSize;
     public int ZSize;
     [Header("Height of Perlin Noise:")]
+
     public float HeightAcrossX;
     public float HeightAcrossZ;
     public float multiplyHeight;
@@ -20,11 +23,16 @@ public class MeshGenerator : MonoBehaviour
     {
         LandMesh = new Mesh();
         GetComponent<MeshFilter>().mesh = LandMesh;
+        LandMesh.name = "RaceTrack Terrain";
 
+        //CreateTerrain();
+       // UpdateTerrain();
+    }
+    private void Update()
+    {
         CreateTerrain();
         UpdateTerrain();
     }
-
     void CreateTerrain()
     {
         vertices = new Vector3[(XSize + 1) * (ZSize + 1)];
