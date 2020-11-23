@@ -81,4 +81,11 @@ public class MeshGenerator : MonoBehaviour
         LandMesh.RecalculateNormals();// recalculating the lighting and rendering
         
     }
+    private void OnDrawGizmos()
+    {
+        for(int i = 0; i< vertices.Length; i++)
+        {
+            Gizmos.DrawSphere(vertices[i],0.05f);
+        }
+    }
 }
