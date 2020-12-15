@@ -17,16 +17,16 @@ public class pathfinding : MonoBehaviour
     }
     void findpath(Vector3 startPos, Vector3 targetpos)
     {
-        node startnode = Grid.NodefromWorldPoint(startPos);
-        node targetnode = Grid.NodefromWorldPoint(targetpos);
+        NodeScript startnode = Grid.NodefromWorldPoint(startPos);
+        NodeScript targetnode = Grid.NodefromWorldPoint(targetpos);
 
-        List<node> openSet = new List<node>();
-        HashSet<node> closeSet = new HashSet<node>();
+        List<NodeScript> openSet = new List<NodeScript>();
+        HashSet<NodeScript> closeSet = new HashSet<NodeScript>();
         openSet.Add(startnode);
 
         while(openSet.Count > 0 )
         {
-            node currentNode = openSet[0];
+            NodeScript currentNode = openSet[0];
             for(int i = 1; i < openSet.Count; i++)
             {
                 if(openSet[i].fcost < currentNode.fcost || openSet[i].fcost == currentNode.fcost && openSet[i].hCost < currentNode.hCost) // checking to see if the next node has a lower cost, if it does make it the current node
@@ -42,7 +42,7 @@ public class pathfinding : MonoBehaviour
                 reTracePath(startnode, targetnode);
                 return;
             }
-            foreach( node neighbour in Grid.GetNeighbours(currentNode))
+            foreach(NodeScript neighbour in Grid.GetNeighbours(currentNode))
             {
                 if(!neighbour.walkable || closeSet.Contains(neighbour))
                 {
@@ -65,10 +65,10 @@ public class pathfinding : MonoBehaviour
         }
     }
 
-    void reTracePath(node startnode, node endnode)
+    void reTracePath(NodeScript startnode, NodeScript endnode)
     {
-        List<node> path = new List<node>();
-        node currentNode = endnode;
+        List<NodeScript> path = new List<NodeScript>();
+        NodeScript currentNode = endnode;
         while(currentNode != startnode)
         {
             path.Add(currentNode);
@@ -78,7 +78,7 @@ public class pathfinding : MonoBehaviour
         path.Reverse();
         Grid.path = path;
     }
-    int getDistance(node a, node b)
+    int getDistance(NodeScript a, NodeScript b)
     {
         int distanceX = Mathf.Abs(a.GridX - b.GridX);
         int distanceZ = Mathf.Abs(a.GridY - b.GridY);
