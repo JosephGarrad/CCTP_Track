@@ -6,7 +6,9 @@ public class MeshGenerator : MonoBehaviour
 {
     Mesh LandMesh;
     Vector3[] vertices;
+ 
     int[] triangles;
+   
 
     [Header("Size of Terrain:")]
 
@@ -17,7 +19,7 @@ public class MeshGenerator : MonoBehaviour
     public float HeightAcrossX;
     public float HeightAcrossZ;
     public float multiplyHeight;
-
+  
     public Color[] colorMap;
     public float Freq_1;
     public float Freq_2;
@@ -26,7 +28,7 @@ public class MeshGenerator : MonoBehaviour
     public float Amp_2;
     public float Amp_3;
     public Gradient Grad;
-
+   
     public GameObject Cube;
     float minHeight;
     float maxHeight;
@@ -36,7 +38,7 @@ public class MeshGenerator : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-      
+     
         LandMesh = new Mesh();
         GetComponent<MeshFilter>().mesh = LandMesh;
         LandMesh.name = "RaceTrack Terrain";
@@ -45,39 +47,27 @@ public class MeshGenerator : MonoBehaviour
          UpdateTerrain();
         placeTrack();
     }
+ 
     private void Update()
     {
-       // CreateTerrain();
-       // UpdateTerrain();
+       
         
     }
 
     void placeTrack()
     {
-        //StartPos = new Vector3[vertices.Length];
-        var matrix = transform.localToWorldMatrix;
 
-        //for (int i = 0, z = 0; z < ZSize; z++)
-        //{
-        //    for (int x = 0; x < XSize; x++)
-        //    {
-        //        Vector3 startPoint = new Vector3(vertices[5].x, vertices[i].y, vertices[9].z);
-        //        if(StartPos[i] == startPoint)
-        //        {
-        //            Instantiate(Cube, matrix.MultiplyPoint3x4(startPoint), Quaternion.identity);
-        //        }
-        //    }
-        //}
+        var matrix = transform.localToWorldMatrix;
 
         Matrix4x4 localtoworld = transform.localToWorldMatrix;
         MeshFilter mf = this.GetComponent<MeshFilter>();
-        XVert = vertices[5].x;
-        zVert = vertices[5].z;
+        XVert = vertices[50].x;
+        zVert = vertices[2].z;
     
 
             for (int i = 0; i < mf.mesh.vertices.Length; i++)
         {
-            Vector3 startPoint = new Vector3(XVert, vertices[i].y, zVert);
+            Vector3 startPoint = new Vector3(XVert, vertices[i].y, vertices[i].z/*zVert + 2*/) ;
 
             if (startPoint == vertices[i])
             {
@@ -214,9 +204,10 @@ float CalculateMultiNoise(float x, float z)
     //}
     private void OnDrawGizmos()
     {
-        for(int i = 0; i< vertices.Length; i++)
-        {
-            Gizmos.DrawSphere(vertices[i],0.05f);
-        }
+        //for(int i = 0; i< vertices.Length; i++)
+        //{
+         //   Gizmos.DrawSphere(vertices[i],0.05f);
+       // }
+        
     }
 }
