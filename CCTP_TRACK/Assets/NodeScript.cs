@@ -9,6 +9,7 @@ public class NodeScript
     public Vector3 worldPos;
     public int GridX;
     public int GridY;
+    public int gridy;
     public int gCost;
     public int hCost;
     public NodeScript parent;
@@ -19,6 +20,7 @@ public class NodeScript
         worldPos = _worldPos;
         GridX = gridx;
         GridY = gridy;
+       
     }
     public int fcost
     {

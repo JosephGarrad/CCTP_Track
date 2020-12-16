@@ -155,6 +155,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2b4752c157ab594f92a1ec88990133a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  vertices: []
   XSize: 200
   ZSize: 200
   HeightAcrossX: 0.05
@@ -259,7 +260,8 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -100, y: 0, z: -100}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 2007823586}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -959,10 +961,11 @@ MonoBehaviour:
   unwalkable:
     serializedVersion: 2
     m_Bits: 16
-  Worldsize: {x: 200, y: 200}
+  Worldsize: {x: 200, y: 200, z: 0}
   TerrainGenerator: {fileID: 289922950}
   GridXsize: 0
   GridZsize: 0
+  GridHeight: 0
   VerticiesRadius: 1
 --- !u!4 &2007823586
 Transform:
@@ -972,14 +975,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2007823583}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 10, z: 0}
+  m_LocalPosition: {x: 100, y: 10, z: 100}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 909808983}
   - {fileID: 511924241}
   - {fileID: 550707296}
-  m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_Father: {fileID: 289922954}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2007823587
 MonoBehaviour:

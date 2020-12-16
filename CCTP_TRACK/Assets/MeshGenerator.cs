@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class MeshGenerator : MonoBehaviour
 {
-    Mesh LandMesh;
-    Vector3[] vertices;
+   public Mesh LandMesh;
+   public Vector3[] vertices;
  
-    int[] triangles;
+     public int[] triangles;
    
 
     [Header("Size of Terrain:")]
@@ -35,10 +35,15 @@ public class MeshGenerator : MonoBehaviour
     public Vector3[] StartPos;
     public float XVert;
     public float zVert;
+    public float VertHeight;
     // Start is called before the first frame update
     void Start()
     {
-     
+        for (int i = 0; i < vertices.Length; i++)
+        {
+            VertHeight = LandMesh.vertices[i].y;
+        }
+       
         LandMesh = new Mesh();
         GetComponent<MeshFilter>().mesh = LandMesh;
         LandMesh.name = "RaceTrack Terrain";
@@ -141,27 +146,7 @@ public class MeshGenerator : MonoBehaviour
     void UpdateTerrain()
     {
 
-        //Color[] colourMap = new Color[XSize * ZSize];
-        //Texture2D texture = new Texture2D(XSize, ZSize);
 
-        //for (int x = 0; x < XSize; x++)
-        //{
-        //    for(int z=0; z<ZSize;z++)
-        //        { 
-        //    float currentHeight = CalculateMultiNoise(x, z);
-        //        for(int i = 0; i<Regions.Length; i++)
-        //        {
-        //            if(currentHeight<= Regions[i].height)
-        //            {
-
-        //                //colourMap[z * XSize + x] = Regions[i].Colour;
-        //                texture.SetPixel(x,z,Regions[i].Colour);
-        //                break;
-        //            }
-        //        }
-        //    }
-
-        //}
 
 
        // texture.Apply();
@@ -204,10 +189,10 @@ float CalculateMultiNoise(float x, float z)
     //}
     private void OnDrawGizmos()
     {
-        //for(int i = 0; i< vertices.Length; i++)
-        //{
-         //   Gizmos.DrawSphere(vertices[i],0.05f);
-       // }
+        for(int i = 0; i< vertices.Length; i++)
+        {
+           Gizmos.DrawSphere(vertices[i],0.05f);
+        }
         
     }
 }

@@ -6,18 +6,20 @@ public class gride : MonoBehaviour
 {
     public LayerMask unwalkable;
   
-    public Vector2 Worldsize;
+    public Vector3 Worldsize;
     float nodeDiam;
     NodeScript[,] grid;
     MeshGenerator MG;
     public GameObject TerrainGenerator;
     public int GridXsize;
     public int GridZsize;
+    public int GridHeight;
     public float VerticiesRadius;
+    bool walkable;
     // Start is called before the first frame update
     private void Start()
     {
-        
+
         MG = TerrainGenerator.gameObject.GetComponent<MeshGenerator>();
          
    
@@ -26,12 +28,12 @@ public class gride : MonoBehaviour
         GridXsize = Mathf.RoundToInt(Worldsize.x / nodeDiam);
         GridZsize = Mathf.RoundToInt(Worldsize.y / nodeDiam);
         GridXsize = MG.XSize/ 2;
-        GridZsize = MG.ZSize/ 2;
-        
+        GridZsize = MG.ZSize/2;
+        createGrid();
     }
     private void Update()
     {
-        createGrid();
+       
     }
     void createGrid()
     {
@@ -43,9 +45,18 @@ public class gride : MonoBehaviour
         {
             for (int z = 0; z < GridZsize; z++)
             {
-                Vector3 worldpoint = worldbottomLeft + Vector3.right * (x * nodeDiam + VerticiesRadius) + Vector3.forward * (z * nodeDiam + VerticiesRadius);
-                bool walkable = !(Physics.CheckSphere(worldpoint, VerticiesRadius, unwalkable));
-                grid[x, z] = new NodeScript(walkable, worldpoint,x,z);
+                for (int i = 0; i < MG.vertices.Length; i++)
+                {
+                    //Vector3 startPoint = new Vector3(MG.vertices[i].x, MG.vertices[i].y, MG.vertices[i].z);
+                    Vector3 worldpoint = worldbottomLeft + Vector3.right * (x * nodeDiam + VerticiesRadius) + Vector3.forward * (z * nodeDiam + VerticiesRadius);
+                    if( MG.VertHeight == 10)
+                    {
+                        walkable = !(Physics.CheckSphere(MG.vertices[i] , VerticiesRadius, unwalkable));
+                    }
+                     walkable = !(Physics.CheckSphere(worldpoint, VerticiesRadius, unwalkable));
+                    grid[x, z] = new NodeScript(walkable, worldpoint, x, z);
+                }
+                
             }
         }
     }
