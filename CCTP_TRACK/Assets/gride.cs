@@ -9,29 +9,39 @@ public class gride : MonoBehaviour
     public Vector2 Worldsize;
     float nodeDiam;
     NodeScript[,] grid;
-    public int XSize;
-    public int ZSize;
+    MeshGenerator MG;
+    public GameObject TerrainGenerator;
+    public int GridXsize;
+    public int GridZsize;
     public float VerticiesRadius;
     // Start is called before the first frame update
     private void Start()
     {
-       
-        //grid = go.gameObject.GetComponent<NodeScript[,]>();
+        
+        MG = TerrainGenerator.gameObject.GetComponent<MeshGenerator>();
+         
+   
 
         nodeDiam = VerticiesRadius * 2;
-        XSize = Mathf.RoundToInt(Worldsize.x / nodeDiam);
-        ZSize = Mathf.RoundToInt(Worldsize.y / nodeDiam);
+        GridXsize = Mathf.RoundToInt(Worldsize.x / nodeDiam);
+        GridZsize = Mathf.RoundToInt(Worldsize.y / nodeDiam);
+        GridXsize = MG.XSize/ 2;
+        GridZsize = MG.ZSize/ 2;
+        
+    }
+    private void Update()
+    {
         createGrid();
     }
     void createGrid()
     {
 
-        grid = new NodeScript[XSize, ZSize];
+        grid = new NodeScript[GridXsize, GridZsize];
         Vector3 worldbottomLeft = transform.position - Vector3.right * Worldsize.x / 2 - Vector3.forward * Worldsize.y / 2;
         
-        for (int x = 0; x < XSize; x++)
+        for (int x = 0; x < GridXsize; x++)
         {
-            for (int z = 0; z < ZSize; z++)
+            for (int z = 0; z < GridZsize; z++)
             {
                 Vector3 worldpoint = worldbottomLeft + Vector3.right * (x * nodeDiam + VerticiesRadius) + Vector3.forward * (z * nodeDiam + VerticiesRadius);
                 bool walkable = !(Physics.CheckSphere(worldpoint, VerticiesRadius, unwalkable));
@@ -54,7 +64,7 @@ public class gride : MonoBehaviour
                 }
                 int checkX = Node.GridX + x;
                 int checkZ = Node.GridY + z;
-                if (checkX >= 0 && checkX < XSize && checkZ >= 0 && checkZ < ZSize)
+                if (checkX >= 0 && checkX < GridXsize && checkZ >= 0 && checkZ < GridZsize)
                 {
                     neighbours.Add(grid[checkX, checkZ]);
                 }
@@ -70,8 +80,8 @@ public class gride : MonoBehaviour
         percentx = Mathf.Clamp01(percentx); // clamping an nomralising the position. 
         percentz = Mathf.Clamp01(percentz);
 
-        int x =  Mathf.RoundToInt((XSize - 1) * percentx);
-        int y = Mathf.RoundToInt((ZSize - 1) * percentz);
+        int x =  Mathf.RoundToInt((GridXsize - 1) * percentx);
+        int y = Mathf.RoundToInt((GridZsize - 1) * percentz);
         return grid[x, y];
     }
 
