@@ -2,7 +2,7 @@
 using UnityEngine;
 
 
-public class NodeScript : MonoBehaviour 
+public class NodeScript 
 { 
 
     public bool walkable;

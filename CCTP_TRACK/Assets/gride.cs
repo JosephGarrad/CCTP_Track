@@ -15,9 +15,8 @@ public class gride : MonoBehaviour
     // Start is called before the first frame update
     private void Start()
     {
-        GameObject go = new GameObject();
-        go.AddComponent<NodeScript>();
-        grid = go.gameObject.GetComponent<NodeScript[,]>();
+       
+        //grid = go.gameObject.GetComponent<NodeScript[,]>();
 
         nodeDiam = VerticiesRadius * 2;
         XSize = Mathf.RoundToInt(Worldsize.x / nodeDiam);
@@ -40,6 +39,30 @@ public class gride : MonoBehaviour
             }
         }
     }
+
+    public List<NodeScript> GetNeighbours(NodeScript Node)
+    {
+        List<NodeScript> neighbours = new List<NodeScript>();
+
+        for (int x = -1; x <= 1; x++)
+        {
+            for (int z = -1; z <= 1; z++)
+            {
+                if (x == 0 && z == 0)
+                {
+                    continue;
+                }
+                int checkX = Node.GridX + x;
+                int checkZ = Node.GridY + z;
+                if (checkX >= 0 && checkX < XSize && checkZ >= 0 && checkZ < ZSize)
+                {
+                    neighbours.Add(grid[checkX, checkZ]);
+                }
+            }
+        }
+        // going around the current nodes x and z axis and checking for all the surronding nodes and if they are not the current node adding them to the neighbours list
+        return neighbours;
+    }
     public NodeScript NodefromWorldPoint(Vector3 worldPos) // getting the position of the current node aka player node
     {
         float percentx = (worldPos.x + Worldsize.x / 2) / Worldsize.x;
@@ -52,29 +75,7 @@ public class gride : MonoBehaviour
         return grid[x, y];
     }
 
-    public List<NodeScript> GetNeighbours(NodeScript Node)
-    {
-        List<NodeScript> neighbours = new List<NodeScript>();
-
-        for(int x = -1; x<= 1; x++)
-        {
-            for(int z = -1; x<=1; z++)
-            {
-                if (x == 0 && z == 0)
-                {
-                    continue;
-                }
-                int checkX = Node.GridX + x;
-                int checkZ = Node.GridY + z;
-                if(checkX >= 0 && checkX < XSize && checkZ >= 0 && checkZ < ZSize)
-                {
-                    neighbours.Add(grid[checkX, checkZ]);
-                }
-            }
-        }
-        // going around the current nodes x and z axis and checking for all the surronding nodes and if they are not the current node adding them to the neighbours list
-        return neighbours;
-    }
+   
 
 
     public List<NodeScript> path;
@@ -93,7 +94,7 @@ public class gride : MonoBehaviour
                // }
                 if (path != null)
                 {
-                    if(path.Contains(n))
+                   if(path.Contains(n))
                     {
                         Gizmos.color = Color.black;
                     }

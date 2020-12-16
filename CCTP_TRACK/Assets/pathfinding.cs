@@ -6,14 +6,15 @@ public class pathfinding : MonoBehaviour
 {
     gride Grid;
 
-    public Transform seeker, target;
+    public Transform seeker;
+        public  Transform Target;
     private void Awake()
     {
         Grid = GetComponent<gride>(); //getting the gride script
     }
     void Update()
     {
-        findpath(seeker.position, target.position);
+        findpath(seeker.position, Target.position);
     }
     void findpath(Vector3 startPos, Vector3 targetpos)
     {
