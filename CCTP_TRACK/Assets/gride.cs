@@ -39,7 +39,7 @@ public class gride : MonoBehaviour
     {
 
         grid = new NodeScript[GridXsize, GridZsize];
-        Vector3 worldbottomLeft = transform.position - Vector3.right * Worldsize.x / 2 - Vector3.forward * Worldsize.y / 2;
+        Vector3 worldbottomLeft = transform.position - Vector3.right * Worldsize.x / 2- Vector3.forward * Worldsize.y / 2;
         
         for (int x = 0; x < GridXsize; x++)
         {

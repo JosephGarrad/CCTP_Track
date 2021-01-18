@@ -11,6 +11,7 @@ public class TrackBuilder :  MonoBehaviour
     public GameObject Cube;
     bool Built = false;
     gride Grid;
+    int offset = 197;
     // Start is called before the first frame update
     void Start()
     {
@@ -40,16 +41,31 @@ public class TrackBuilder :  MonoBehaviour
         //    }
         //}
 
-        for (int i = 0; i < MG.VertIsies.Length; i++)
+        for (int i = 0; i < MG.VertIsies.Length; i++)// looping through the verticies
         {
-            for (int j = 0; j < GD.path.Count; j++)
-            {
-                if (j == i)
-                {
+            
+            Debug.Log("Node X " + GD.path[i].GridX);
+            Debug.Log("Node Z " + GD.path[i].GridY);
 
-                    Instantiate(Cube,new Vector3(MG.VertIsies[i].x,MG.VertIsies[i].y,MG.VertIsies[i].z), Quaternion.identity);
+            Debug.Log("vert X " + MG.VertIsies[i].x);
+            Debug.Log("vert Z " + MG.VertIsies[i].z);
+
+            if (Mathf.Floor(GD.path[i].worldPos.x)- offset == Mathf.Floor(MG.VertIsies[i].x))
+            {
+                Debug.Log("cummies");
+               
             }
-        }
+            else
+            {
+                Debug.Log("Max");
+
+            }
+            offset -= 2;
+
+
+            //Instantiate(Cube,new Vector3(MG.VertIsies[i].x,MG.VertIsies[i].y,MG.VertIsies[i].z), Quaternion.identity);
+            // }
+
 
         }
     }
