@@ -9,7 +9,7 @@ public class NodeScript
     public Vector3 worldPos;
     public int GridX;
     public int GridY;
-    public int gridx;
+       public int gridx;
     public int gridy;
     public int gCost;
     public int hCost;

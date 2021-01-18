@@ -45,8 +45,8 @@ public class gride : MonoBehaviour
         {
             for (int z = 0; z < GridZsize; z++)
             {
-              
-                    Vector3 worldpoint = worldbottomLeft + Vector3.right * (x * nodeDiam + VerticiesRadius) + Vector3.forward * (z * nodeDiam + VerticiesRadius);
+
+                Vector3 worldpoint = new Vector3(0,0,0) + Vector3.right * (x * nodeDiam + VerticiesRadius) + Vector3.forward * (z * nodeDiam + VerticiesRadius);
                      walkable = !(Physics.CheckSphere(worldpoint, VerticiesRadius, unwalkable));
                     grid[x, z] = new NodeScript(walkable, worldpoint, x, z);
            
