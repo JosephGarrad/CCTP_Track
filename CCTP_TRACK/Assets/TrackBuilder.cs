@@ -8,6 +8,8 @@ public class TrackBuilder :  MonoBehaviour
     public GameObject TerrainGenerator;
     gride GD;
     public GameObject GridScript;
+    NodeScript ND;
+    public GameObject NodeScript;
     public GameObject Cube;
     bool Built = false;
     gride Grid;
@@ -17,6 +19,7 @@ public class TrackBuilder :  MonoBehaviour
     {
         MG = TerrainGenerator.gameObject.GetComponent<MeshGenerator>();
         GD = GridScript.gameObject.GetComponent<gride>();
+        ND = NodeScript.gameObject.GetComponent<NodeScript>();
         Grid = GetComponent<gride>();
 
     }
@@ -43,24 +46,26 @@ public class TrackBuilder :  MonoBehaviour
 
         for (int i = 0; i < MG.VertIsies.Length; i++)// looping through the verticies
         {
-            
-            Debug.Log("Node X " + GD.path[i].GridX);
-            Debug.Log("Node Z " + GD.path[i].GridY);
 
-            Debug.Log("vert X " + MG.VertIsies[i].x);
-            Debug.Log("vert Z " + MG.VertIsies[i].z);
+             Debug.Log("Path X " + GD.path[i].worldPos);
+            Debug.Log("Vert X " + MG.VertIsies[i]);
+            //Debug.Log("Node X " + GD.path[i].worldPos);
+            //Debug.Log("Node Z " + GD.path[i].worldPos);
 
-            if (Mathf.Floor(GD.path[i].worldPos.x)- offset == Mathf.Floor(MG.VertIsies[i].x))
+            //Debug.Log("vert X " + MG.VertIsies[i].x);
+            //Debug.Log("vert Z " + MG.VertIsies[i].z);
+            Vector3 pathVec = new Vector3(GD.path[i].worldPos.x - 85, GD.path[i].worldPos.y, GD.path[i].worldPos.z);
+            if (pathVec.x ==  MG.VertIsies[i].x)
             {
-                Debug.Log("cummies");
-               
+                //Debug.Log("cummies");
+                Instantiate(Cube,new Vector3(MG.VertIsies[i].x, MG.VertIsies[i].y, MG.VertIsies[i].z), Quaternion.identity);
             }
             else
             {
                 Debug.Log("Max");
 
             }
-            offset -= 2;
+            offset += 1;
 
 
             //Instantiate(Cube,new Vector3(MG.VertIsies[i].x,MG.VertIsies[i].y,MG.VertIsies[i].z), Quaternion.identity);

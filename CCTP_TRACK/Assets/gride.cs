@@ -24,11 +24,11 @@ public class gride : MonoBehaviour
          
    
 
-        nodeDiam = VerticiesRadius * 2;
+        nodeDiam = VerticiesRadius ;
         GridXsize = Mathf.RoundToInt(Worldsize.x / nodeDiam);
         GridZsize = Mathf.RoundToInt(Worldsize.y / nodeDiam);
-        GridXsize = MG.XSize/ 2;
-        GridZsize = MG.ZSize/2;
+        GridXsize = MG.XSize;
+        GridZsize = MG.ZSize;
         createGrid();
     }
     private void Update()
@@ -47,6 +47,7 @@ public class gride : MonoBehaviour
             {
 
                 Vector3 worldpoint = new Vector3(0,0,0) + Vector3.right * (x * nodeDiam + VerticiesRadius) + Vector3.forward * (z * nodeDiam + VerticiesRadius);
+                //Debug.Log(worldpoint);
                      walkable = !(Physics.CheckSphere(worldpoint, VerticiesRadius, unwalkable));
                     grid[x, z] = new NodeScript(walkable, worldpoint, x, z);
            
@@ -80,14 +81,16 @@ public class gride : MonoBehaviour
     }
     public NodeScript NodefromWorldPoint(Vector3 worldPos) // getting the position of the current node aka player node
     {
-        float percentx = (worldPos.x + Worldsize.x / 2) / Worldsize.x;
-        float percentz = (worldPos.z + Worldsize.y / 2) / Worldsize.y;
+        float percentx = (worldPos.x + Worldsize.x/ 2) / Worldsize.x;
+        float percentz = (worldPos.z + Worldsize.y /2) / Worldsize.y;
         percentx = Mathf.Clamp01(percentx); // clamping an nomralising the position. 
         percentz = Mathf.Clamp01(percentz);
 
         int x =  Mathf.RoundToInt((GridXsize - 1) * percentx);
         int y = Mathf.RoundToInt((GridZsize - 1) * percentz);
+        //Debug.Log(worldPos);
         return grid[x, y];
+       
     }
 
    

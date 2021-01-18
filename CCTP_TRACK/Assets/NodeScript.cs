@@ -22,7 +22,7 @@ public class NodeScript
         worldPos = _worldPos;
         GridX = gridx;
         GridY = gridy;
-       
+      
     }
     public int fcost
     {
