@@ -26,7 +26,7 @@ public class NodeScript
     {
         get
         {
-            return gCost + hCost;
+            return gCost + hCost; // creating the fcost of the surronding nodes
         }
     }
 }

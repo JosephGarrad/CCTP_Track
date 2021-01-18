@@ -5,7 +5,8 @@ using UnityEngine;
 public class MeshGenerator : MonoBehaviour
 {
    public Mesh LandMesh;
-   public Vector3[] vertices;
+   public Vector3[] VertIsies;
+  // public List<Vector3[]> Verticies2 = new List<Vector3[]>();
  
      public int[] triangles;
    
@@ -28,7 +29,7 @@ public class MeshGenerator : MonoBehaviour
     public float Amp_2;
     public float Amp_3;
     public Gradient Grad;
-   
+    public GameObject aStarManager;
     public GameObject Cube;
     float minHeight;
     float maxHeight;
@@ -39,7 +40,7 @@ public class MeshGenerator : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        for (int i = 0; i < vertices.Length; i++)
+        for (int i = 0; i < VertIsies.Length; i++)
         {
             VertHeight = LandMesh.vertices[i].y;
         }
@@ -66,15 +67,15 @@ public class MeshGenerator : MonoBehaviour
 
         Matrix4x4 localtoworld = transform.localToWorldMatrix;
         MeshFilter mf = this.GetComponent<MeshFilter>();
-        XVert = vertices[50].x;
-        zVert = vertices[2].z;
+        XVert = VertIsies[50].x;
+        zVert = VertIsies[2].z;
     
 
             for (int i = 0; i < mf.mesh.vertices.Length; i++)
         {
-            Vector3 startPoint = new Vector3(XVert, vertices[i].y, vertices[i].z/*zVert + 2*/) ;
+            Vector3 startPoint = new Vector3(XVert, VertIsies[i].y, VertIsies[i].z/*zVert + 2*/) ;
 
-            if (startPoint == vertices[i])
+            if (startPoint == VertIsies[i])
             {
                 Instantiate(Cube, localtoworld.MultiplyPoint3x4(startPoint) , Quaternion.identity);
            }
@@ -85,15 +86,15 @@ public class MeshGenerator : MonoBehaviour
        
     void CreateTerrain()
     {
-        vertices = new Vector3[(XSize + 1) * (ZSize + 1)];
-
+        VertIsies = new Vector3[(XSize + 1) * (ZSize + 1)];
+        // aStarManager.gameObject.GetComponent<gride>().createGrid();
         for (int j = 0, z = 0; z <= ZSize; z++)
         {
             for (int x = 0; x <= XSize; x++)
             {
-
+                
                 float Elevation = CalculateMultiNoise(x, z);
-                vertices[j] = new Vector3(x, Elevation, z);
+                VertIsies[j] = new Vector3(x, Elevation, z);
 
                 if(Elevation > maxHeight)
                 {
@@ -132,12 +133,12 @@ public class MeshGenerator : MonoBehaviour
 
         }
 
-        colorMap = new Color[vertices.Length];
+        colorMap = new Color[VertIsies.Length];
         for (int i = 0, z = 0; z < ZSize; z++)
         {
             for (int x = 0; x < XSize; x++)
             {
-                float height = Mathf.InverseLerp(minHeight,maxHeight, vertices[i].y);// normalising the hieght of terrain to work with gradient;
+                float height = Mathf.InverseLerp(minHeight,maxHeight, VertIsies[i].y);// normalising the hieght of terrain to work with gradient;
                 colorMap[i] = Grad.Evaluate(height); 
                 i++;
             }
@@ -153,7 +154,7 @@ public class MeshGenerator : MonoBehaviour
 
         LandMesh.Clear(); // clears any previous mesh loaded in to this object in the scene
 
-        LandMesh.vertices = vertices;
+        LandMesh.vertices = VertIsies;
         LandMesh.triangles = triangles;
         
         LandMesh.RecalculateNormals();
@@ -178,20 +179,11 @@ float CalculateMultiNoise(float x, float z)
         
         return y;
     }
- 
-    //[System.Serializable]
-    //public struct TerrainTypes
-    //{
-    //    public string name;
-    //    public float height;
-    //    public Color Colour;
-
-    //}
     private void OnDrawGizmos()
     {
-        for(int i = 0; i< vertices.Length; i++)
+        for(int i = 0; i< VertIsies.Length; i++)
         {
-           Gizmos.DrawSphere(vertices[i],0.05f);
+           Gizmos.DrawSphere(VertIsies[i],0.05f);
         }
         
     }

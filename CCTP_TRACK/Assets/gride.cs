@@ -8,7 +8,7 @@ public class gride : MonoBehaviour
   
     public Vector3 Worldsize;
     float nodeDiam;
-    NodeScript[,] grid;
+   public NodeScript[,] grid;
     MeshGenerator MG;
     public GameObject TerrainGenerator;
     public int GridXsize;
@@ -35,7 +35,7 @@ public class gride : MonoBehaviour
     {
        
     }
-    void createGrid()
+   public void createGrid()
     {
 
         grid = new NodeScript[GridXsize, GridZsize];
@@ -45,17 +45,11 @@ public class gride : MonoBehaviour
         {
             for (int z = 0; z < GridZsize; z++)
             {
-                for (int i = 0; i < MG.vertices.Length; i++)
-                {
-                    //Vector3 startPoint = new Vector3(MG.vertices[i].x, MG.vertices[i].y, MG.vertices[i].z);
+              
                     Vector3 worldpoint = worldbottomLeft + Vector3.right * (x * nodeDiam + VerticiesRadius) + Vector3.forward * (z * nodeDiam + VerticiesRadius);
-                    if( MG.VertHeight == 10)
-                    {
-                        walkable = !(Physics.CheckSphere(MG.vertices[i] , VerticiesRadius, unwalkable));
-                    }
                      walkable = !(Physics.CheckSphere(worldpoint, VerticiesRadius, unwalkable));
                     grid[x, z] = new NodeScript(walkable, worldpoint, x, z);
-                }
+           
                 
             }
         }
