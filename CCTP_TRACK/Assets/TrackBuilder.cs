@@ -13,7 +13,7 @@ public class TrackBuilder :  MonoBehaviour
     public GameObject Cube;
     bool Built = false;
     gride Grid;
-    int offset = 197;
+    //int offset = 197;
     // Start is called before the first frame update
     void Start()
     {
@@ -44,34 +44,57 @@ public class TrackBuilder :  MonoBehaviour
         //    }
         //}
 
-        for (int i = 0; i < MG.VertIsies.Length; i++)// looping through the verticies
-        {
+        //for (int i = 0; i < MG.VertIsies.Length; i++)// looping through the verticies
+        //{
 
-             Debug.Log("Path X " + GD.path[i].worldPos);
-            Debug.Log("Vert X " + MG.VertIsies[i]);
-            //Debug.Log("Node X " + GD.path[i].worldPos);
-            //Debug.Log("Node Z " + GD.path[i].worldPos);
+            //Debug.Log("Path X " + GD.path[i].worldPos);
+            //Debug.Log("Vert X " + MG.VertIsies[i]);
+            ////Debug.Log("Node X " + GD.path[i].worldPos);
+            ////Debug.Log("Node Z " + GD.path[i].worldPos);
 
-            //Debug.Log("vert X " + MG.VertIsies[i].x);
-            //Debug.Log("vert Z " + MG.VertIsies[i].z);
-            Vector3 pathVec = new Vector3(GD.path[i].worldPos.x - 85, GD.path[i].worldPos.y, GD.path[i].worldPos.z);
-            if (pathVec.x ==  MG.VertIsies[i].x)
-            {
-                //Debug.Log("cummies");
-                Instantiate(Cube,new Vector3(MG.VertIsies[i].x, MG.VertIsies[i].y, MG.VertIsies[i].z), Quaternion.identity);
-            }
-            else
-            {
-                Debug.Log("Max");
+            ////Debug.Log("vert X " + MG.VertIsies[i].x);
+            ////Debug.Log("vert Z " + MG.VertIsies[i].z);
+            //Vector3 pathVec = new Vector3(GD.path[i].worldPos.x, GD.path[i].worldPos.y, GD.path[i].worldPos.z);
+            //if (pathVec.x == MG.VertIsies[i].x && pathVec.z == MG.VertIsies[i].z)
+            //{
+            //    //Debug.Log("cummies");
+            //    Instantiate(Cube, new Vector3(MG.VertIsies[i].x, MG.VertIsies[i].y, MG.VertIsies[i].z), Quaternion.identity);
+            //}
+            //else
+            //{
+            //    Debug.Log("Max");
 
-            }
-            offset += 1;
+            //}
+            //offset += 1;
 
+            for (int j = 0, z = 0; z <= MG.ZSize; z++)
+           {
+                for (int x = 0; x <= MG.XSize; x++)
+               {
 
-            //Instantiate(Cube,new Vector3(MG.VertIsies[i].x,MG.VertIsies[i].y,MG.VertIsies[i].z), Quaternion.identity);
-            // }
+                Debug.Log("Path X " + GD.path[j].worldPos.x);
+                Debug.Log("Vert X " + MG.VertIsies[j].x);
+                //Debug.Log("Node X " + GD.path[i].worldPos);
+                //Debug.Log("Node Z " + GD.path[i].worldPos);
 
+                //Debug.Log("vert X " + MG.VertIsies[i].x);
+                //Debug.Log("vert Z " + MG.VertIsies[i].z);
+                Vector3 pathVec = new Vector3(GD.path[j].worldPos.x -3, GD.path[j].worldPos.y, GD.path[j].worldPos.z);
+                if (pathVec.x == MG.VertIsies[j].x )
+                {
+                    Debug.Log("cummies");
+                    Instantiate(Cube, new Vector3(MG.VertIsies[j].x, MG.VertIsies[j].y, MG.VertIsies[j].z), Quaternion.identity);
+                }
+                else
+                {
+                    Debug.Log("Max");
 
+                }
+
+               
+               }
+            j++;
         }
+        
     }
 }
