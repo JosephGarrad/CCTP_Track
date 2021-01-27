@@ -5,10 +5,10 @@ using UnityEngine;
 public class gride : MonoBehaviour
 {
     public LayerMask unwalkable;
-  
+
     public Vector3 Worldsize;
     float nodeDiam;
-   public NodeScript[,] grid;
+    public NodeScript[,] grid;
     MeshGenerator MG;
     public GameObject TerrainGenerator;
     public int GridXsize;
@@ -21,42 +21,61 @@ public class gride : MonoBehaviour
     {
 
         MG = TerrainGenerator.gameObject.GetComponent<MeshGenerator>();
-         
-   
 
-        nodeDiam = VerticiesRadius ;
+
+
+        nodeDiam = VerticiesRadius;
         GridXsize = Mathf.RoundToInt(Worldsize.x / nodeDiam);
         GridZsize = Mathf.RoundToInt(Worldsize.y / nodeDiam);
         GridXsize = MG.XSize;
         GridZsize = MG.ZSize;
-        createGrid();
+
     }
     private void Update()
     {
-       
+        createGrid();
     }
-   public void createGrid()
+    public void createGrid()
+
     {
 
         grid = new NodeScript[GridXsize, GridZsize];
-       
-        
+
         for (int i = 0, x = 0; x < GridXsize; x++)
         {
+
+
             for (int z = 0; z < GridZsize; z++)
             {
 
-                Vector3 worldpoint = new Vector3(MG.VertIsies[i].x, MG.VertIsies[i].y, MG.VertIsies[i].z);//new Vector3(0,0,0) + Vector3.right * (x * nodeDiam + VerticiesRadius) + Vector3.forward * (z * nodeDiam + VerticiesRadius);
-              
-                     walkable = !(Physics.CheckSphere(worldpoint, VerticiesRadius, unwalkable));
-                    grid[x, z] = new NodeScript(walkable, worldpoint, x, z);
-               // Debug.Log("Nodes" + worldpoint);
-               // Debug.Log("verts" + new Vector3(MG.VertIsies[i].x, MG.VertIsies[i].y, MG.VertIsies[i].z));
-               i++;
+                
+                Vector3 worldpoint = new Vector3(MG.VertIsies[i].x, MG.VertIsies[i].y, MG.VertIsies[i].z);//new Vector3(0,0, 0) + Vector3.right * (x * nodeDiam + VerticiesRadius) + Vector3.forward * (z * nodeDiam + VerticiesRadius) ;
+                Debug.Log(worldpoint);
+                walkable = !(Physics.CheckSphere(worldpoint, VerticiesRadius, unwalkable));
+                grid[x, z] = new NodeScript(walkable, worldpoint, x, z);
+                // Debug.Log("Nodes" + worldpoint);
+                // Debug.Log("verts" + new Vector3(MG.VertIsies[i].x, MG.VertIsies[i].y, MG.VertIsies[i].z));
+                i++;
             }
-            
         }
     }
+
+    
+
+        
+    
+
+
+    
+
+        
+    
+            
+        
+    
+
+
+    
 
     public List<NodeScript> GetNeighbours(NodeScript Node)
     {
@@ -83,15 +102,16 @@ public class gride : MonoBehaviour
     }
     public NodeScript NodefromWorldPoint(Vector3 worldPos) // getting the position of the current node aka player node
     {
-        float percentx = (worldPos.x + Worldsize.x /2) / Worldsize.x;
-        float percentz = (worldPos.z + Worldsize.y/2) / Worldsize.y;
-        percentx = Mathf.Clamp01(percentx); // clamping an nomralising the position. 
-        percentz = Mathf.Clamp01(percentz);
+        //float percentx = (worldPos.x + Worldsize.x /2) / Worldsize.x;
+        //float percentz = (worldPos.z + Worldsize.y/2) / Worldsize.y;
+        //percentx = Mathf.Clamp01(percentx); // clamping an nomralising the position. 
+        //percentz = Mathf.Clamp01(percentz);
 
         int x = (int)worldPos.x; //Mathf.RoundToInt((GridXsize - 1) * percentx);
-        int y = (int)worldPos.z;//Mathf.RoundToInt((GridZsize - 1) * percentz);
+        int z = (int)worldPos.z;
+        //int y = (int)worldPos.y;//Mathf.RoundToInt((GridZsize - 1) * percentz);
         //Debug.Log(worldPos);
-        return grid[x, y];
+        return grid[x, z];
        
     }
 

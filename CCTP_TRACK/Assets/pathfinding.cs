@@ -20,7 +20,7 @@ public class pathfinding : MonoBehaviour
     {
         NodeScript startnode = Grid.NodefromWorldPoint(startPos);
         NodeScript targetnode = Grid.NodefromWorldPoint(targetpos);
-
+        //Debug.Log(startPos);
         List<NodeScript> openSet = new List<NodeScript>();
         HashSet<NodeScript> closeSet = new HashSet<NodeScript>();
         openSet.Add(startnode);
@@ -70,9 +70,16 @@ public class pathfinding : MonoBehaviour
     {
         List<NodeScript> path = new List<NodeScript>();
         NodeScript currentNode = endnode;
+        int switcher = 0;
         while(currentNode != startnode)
         {
             path.Add(currentNode);
+            if (switcher == 18)
+            {
+                Debug.Log(currentNode.worldPos);
+               
+            }
+            switcher += 1;
             currentNode = currentNode.parent;
 
         }
