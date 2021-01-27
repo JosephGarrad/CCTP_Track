@@ -372,7 +372,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 511924237}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 29.71, y: 0, z: 16.68}
+  m_LocalPosition: {x: 29.71, y: 10, z: 16.68}
   m_LocalScale: {x: 3, y: 3, z: 3}
   m_Children: []
   m_Father: {fileID: 0}
@@ -405,7 +405,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 550707295}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 17.21, y: 0, z: 12.26}
+  m_LocalPosition: {x: 17.21, y: 9, z: 12.26}
   m_LocalScale: {x: 9, y: 3, z: 3}
   m_Children: []
   m_Father: {fileID: 0}
@@ -519,7 +519,7 @@ MonoBehaviour:
   TerrainGenerator: {fileID: 289922950}
   GridScript: {fileID: 2007823583}
   NodeScript: {fileID: 0}
-  Cube: {fileID: 7442739914693784108, guid: 4c5c6c72ff6cd4847a92320fd9885cb2, type: 3}
+  Cube: {fileID: 0}
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -701,7 +701,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 909808979}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1, y: 0, z: 20}
+  m_LocalPosition: {x: 10.5, y: 13, z: 25.55}
   m_LocalScale: {x: 3, y: 3, z: 3}
   m_Children: []
   m_Father: {fileID: 0}

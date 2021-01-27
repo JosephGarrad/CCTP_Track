@@ -165,7 +165,7 @@ public class MeshGenerator : MonoBehaviour
     //{
        
     //}
-float CalculateMultiNoise(float x, float z)
+    float CalculateMultiNoise(float x, float z)
     {
       
             float[] OctaveFreq = new float[] { Freq_1, Freq_2, Freq_3 };

@@ -41,18 +41,20 @@ public class gride : MonoBehaviour
         grid = new NodeScript[GridXsize, GridZsize];
        
         
-        for (int x = 0; x < GridXsize; x++)
+        for (int i = 0, x = 0; x < GridXsize; x++)
         {
             for (int z = 0; z < GridZsize; z++)
             {
 
-                Vector3 worldpoint = new Vector3(0,0,0) + Vector3.right * (x * nodeDiam + VerticiesRadius) + Vector3.forward * (z * nodeDiam + VerticiesRadius);
+                Vector3 worldpoint = new Vector3(MG.VertIsies[i].x, MG.VertIsies[i].y, MG.VertIsies[i].z);//new Vector3(0,0,0) + Vector3.right * (x * nodeDiam + VerticiesRadius) + Vector3.forward * (z * nodeDiam + VerticiesRadius);
               
                      walkable = !(Physics.CheckSphere(worldpoint, VerticiesRadius, unwalkable));
                     grid[x, z] = new NodeScript(walkable, worldpoint, x, z);
-           
-                
+               // Debug.Log("Nodes" + worldpoint);
+               // Debug.Log("verts" + new Vector3(MG.VertIsies[i].x, MG.VertIsies[i].y, MG.VertIsies[i].z));
+               i++;
             }
+            
         }
     }
 
