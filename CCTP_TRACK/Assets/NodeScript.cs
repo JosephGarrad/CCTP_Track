@@ -16,7 +16,7 @@ public class NodeScript
  
     public NodeScript parent;
     
-    public NodeScript(bool _walkable, Vector3 _worldPos, int gridx, int gridy)
+    public NodeScript(bool _walkable, Vector3 _worldPos, int gridy, int gridx)
     {
         walkable = _walkable;
         worldPos = _worldPos;

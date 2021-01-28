@@ -38,9 +38,9 @@ public class TrackBuilder :  MonoBehaviour
 
 
 
-            for (int j = 0, x = 0; x <= MG.XSize; x++)
+            for (int j = 0, z = 0; z <= MG.ZSize; z++)
            {
-                for (int z = 0; z <= MG.ZSize; z++)
+                for (int x = 0; x <= MG.XSize; x++)
                {
 
               //  Debug.Log("Path X " + GD.path[j].worldPos.x);
@@ -49,8 +49,8 @@ public class TrackBuilder :  MonoBehaviour
                 Vector3 pathVec = new Vector3(GD.path[j].worldPos.x, GD.path[j].worldPos.y, GD.path[j].worldPos.z);
                 if (pathVec.x == MG.VertIsies[j].x )
                 {
-                   // Debug.Log("cummies");
-                    Instantiate(Cube, new Vector3(MG.VertIsies[j].x, MG.VertIsies[j].y, MG.VertIsies[j].z), Quaternion.identity);
+                    Debug.Log("cummies");
+                   // Instantiate(Cube, new Vector3(MG.VertIsies[j].x, MG.VertIsies[j].y, MG.VertIsies[j].z), Quaternion.identity);
                 }
                 else
                 {

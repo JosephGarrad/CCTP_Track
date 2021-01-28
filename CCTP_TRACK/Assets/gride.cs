@@ -10,7 +10,9 @@ public class gride : MonoBehaviour
     float nodeDiam;
     public NodeScript[,] grid;
     MeshGenerator MG;
+    pathfinding PF;
     public GameObject TerrainGenerator;
+    public GameObject Pathfinder;
     public int GridXsize;
     public int GridZsize;
     public int GridHeight;
@@ -19,14 +21,14 @@ public class gride : MonoBehaviour
     // Start is called before the first frame update
     private void Start()
     {
-
+        PF = Pathfinder.gameObject.GetComponent<pathfinding>();
         MG = TerrainGenerator.gameObject.GetComponent<MeshGenerator>();
 
 
 
         nodeDiam = VerticiesRadius;
-        GridXsize = Mathf.RoundToInt(Worldsize.x / nodeDiam);
-        GridZsize = Mathf.RoundToInt(Worldsize.y / nodeDiam);
+       // GridXsize = Mathf.RoundToInt(Worldsize.x / nodeDiam);
+       // GridZsize = Mathf.RoundToInt(Worldsize.y / nodeDiam);
         GridXsize = MG.XSize;
         GridZsize = MG.ZSize;
 
@@ -38,52 +40,35 @@ public class gride : MonoBehaviour
     public void createGrid()
 
     {
-
-        grid = new NodeScript[GridXsize, GridZsize];
-
-        for (int i = 0, x = 0; x < GridXsize; x++)
+        
+        grid = new NodeScript[GridZsize, GridXsize];
+        
+        for (int i = 0, z = 0; z < GridZsize;z++)
         {
+            
 
-
-            for (int z = 0; z < GridZsize; z++)
+            for (int x = 0; x < GridXsize; x++)
             {
 
-                
-                Vector3 worldpoint = new Vector3(MG.VertIsies[i].x, MG.VertIsies[i].y, MG.VertIsies[i].z);//new Vector3(0,0, 0) + Vector3.right * (x * nodeDiam + VerticiesRadius) + Vector3.forward * (z * nodeDiam + VerticiesRadius) ;
-                Debug.Log(worldpoint);
+
+                Vector3 worldpoint = new Vector3(MG.VertIsies[i].x , MG.VertIsies[i].y, MG.VertIsies[i].z);//new Vector3(0, 0, 0) + Vector3.right * (x * nodeDiam + VerticiesRadius) + Vector3.forward * (z * nodeDiam + VerticiesRadius) ;
+               //Debug.Log("Nodes" + worldpoint);
                 walkable = !(Physics.CheckSphere(worldpoint, VerticiesRadius, unwalkable));
-                grid[x, z] = new NodeScript(walkable, worldpoint, x, z);
-                // Debug.Log("Nodes" + worldpoint);
-                // Debug.Log("verts" + new Vector3(MG.VertIsies[i].x, MG.VertIsies[i].y, MG.VertIsies[i].z));
+                grid[z,x] = new NodeScript(walkable, worldpoint, z ,x  );
                 i++;
             }
         }
     }
 
-    
 
-        
-    
-
-
-    
-
-        
-    
-            
-        
-    
-
-
-    
 
     public List<NodeScript> GetNeighbours(NodeScript Node)
     {
         List<NodeScript> neighbours = new List<NodeScript>();
 
-        for (int x = -1; x <= 1; x++)
+        for (int z = -1; z <= 1; z++)
         {
-            for (int z = -1; z <= 1; z++)
+            for (int x = -1; x <= 1; x++)
             {
                 if (x == 0 && z == 0)
                 {
@@ -93,7 +78,7 @@ public class gride : MonoBehaviour
                 int checkZ = Node.GridY + z;
                 if (checkX >= 0 && checkX < GridXsize && checkZ >= 0 && checkZ < GridZsize)
                 {
-                    neighbours.Add(grid[checkX, checkZ]);
+                    neighbours.Add(grid[checkZ, checkX]);
                 }
             }
         }
@@ -111,7 +96,7 @@ public class gride : MonoBehaviour
         int z = (int)worldPos.z;
         //int y = (int)worldPos.y;//Mathf.RoundToInt((GridZsize - 1) * percentz);
         //Debug.Log(worldPos);
-        return grid[x, z];
+        return grid[z, x];
        
     }
 

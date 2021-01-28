@@ -36,7 +36,11 @@ public class MeshGenerator : MonoBehaviour
     public Vector3[] StartPos;
     public float XVert;
     public float zVert;
+    public float XVert2;
+    public float zVert2;
     public float VertHeight;
+    public Vector3 startPoint;
+    public Vector3 Endpoint;
     // Start is called before the first frame update
     void Start()
     {
@@ -51,6 +55,7 @@ public class MeshGenerator : MonoBehaviour
 
         CreateTerrain();
          UpdateTerrain();
+       
         placeTrack();
     }
  
@@ -68,20 +73,23 @@ public class MeshGenerator : MonoBehaviour
         Matrix4x4 localtoworld = transform.localToWorldMatrix;
         MeshFilter mf = this.GetComponent<MeshFilter>();
         XVert = VertIsies[50].x;
-        zVert = VertIsies[2].z;
+        zVert = VertIsies[11].z;
+
+        XVert2 = VertIsies[70].x;
+        zVert2 = VertIsies[54].z;
     
 
-            for (int i = 0; i < mf.mesh.vertices.Length; i++)
-        {
-            Vector3 startPoint = new Vector3(XVert, VertIsies[i].y, VertIsies[i].z/*zVert + 2*/) ;
+           // for (int i = 0; i < mf.mesh.vertices.Length; i++)
+        //{
+           startPoint = new Vector3(50, 0, 14/*zVert + 2*/) ;
+            Endpoint = new Vector3(80, 0, 45);
+           // if (startPoint == VertIsies[i])
+           // {
+           //     Instantiate(Cube, localtoworld.MultiplyPoint3x4(startPoint) , Quaternion.identity);
+           //}
 
-            if (startPoint == VertIsies[i])
-            {
-                Instantiate(Cube, localtoworld.MultiplyPoint3x4(startPoint) , Quaternion.identity);
-           }
 
-
-        }
+        //}
     }
        
     void CreateTerrain()
@@ -95,7 +103,7 @@ public class MeshGenerator : MonoBehaviour
                 
                 float Elevation = CalculateMultiNoise(x, z);
                 VertIsies[j] = new Vector3(x, Elevation, z);
-
+                //Debug.Log("vert" + VertIsies[j]);
                 if(Elevation > maxHeight)
                 {
                     maxHeight = Elevation;
@@ -183,7 +191,7 @@ public class MeshGenerator : MonoBehaviour
     {
         for(int i = 0; i< VertIsies.Length; i++)
         {
-           Gizmos.DrawSphere(VertIsies[i],0.05f);
+          // Gizmos.DrawSphere(VertIsies[i],0.05f);
         }
         
     }

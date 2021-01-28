@@ -5,22 +5,24 @@ using UnityEngine;
 public class pathfinding : MonoBehaviour
 {
     gride Grid;
-
+    MeshGenerator MS;
     public Transform seeker;
         public  Transform Target;
+    public GameObject MeshG;
     private void Awake()
     {
         Grid = GetComponent<gride>(); //getting the gride script
+        MS = MeshG.gameObject.GetComponent<MeshGenerator>();
     }
     void Update()
     {
-        findpath(seeker.position, Target.position);
+        findpath(MS.startPoint, MS.Endpoint);
+       // Debug.Log("seker" + seeker.position);
     }
     void findpath(Vector3 startPos, Vector3 targetpos)
     {
         NodeScript startnode = Grid.NodefromWorldPoint(startPos);
         NodeScript targetnode = Grid.NodefromWorldPoint(targetpos);
-        //Debug.Log(startPos);
         List<NodeScript> openSet = new List<NodeScript>();
         HashSet<NodeScript> closeSet = new HashSet<NodeScript>();
         openSet.Add(startnode);
@@ -69,21 +71,16 @@ public class pathfinding : MonoBehaviour
     void reTracePath(NodeScript startnode, NodeScript endnode)
     {
         List<NodeScript> path = new List<NodeScript>();
+        //Debug.Log(path[path.Count]);
         NodeScript currentNode = endnode;
-        int switcher = 0;
         while(currentNode != startnode)
         {
             path.Add(currentNode);
-            if (switcher == 18)
-            {
-                Debug.Log(currentNode.worldPos);
-               
-            }
-            switcher += 1;
+            
             currentNode = currentNode.parent;
 
         }
-        path.Reverse();
+       path.Reverse();
         Grid.path = path;
     }
     int getDistance(NodeScript a, NodeScript b)
