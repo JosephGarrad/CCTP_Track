@@ -18,6 +18,7 @@ public class gride : MonoBehaviour
     public int GridHeight;
     public float VerticiesRadius;
     bool walkable;
+    public Vector3 worldpoint;
     // Start is called before the first frame update
     private void Start()
     {
@@ -42,20 +43,25 @@ public class gride : MonoBehaviour
     {
         
         grid = new NodeScript[GridZsize, GridXsize];
-        
+        for (int i = 0; i < MG.VertIsies.Length; i++)
+        {
+           
+        }
         for (int i = 0, z = 0; z < GridZsize;z++)
         {
             
 
-            for (int x = 0; x < GridXsize; x++)
+            for (int  x = 0; x < GridXsize; x++)
             {
-
-
-                Vector3 worldpoint = new Vector3(MG.VertIsies[i].x , MG.VertIsies[i].y, MG.VertIsies[i].z);//new Vector3(0, 0, 0) + Vector3.right * (x * nodeDiam + VerticiesRadius) + Vector3.forward * (z * nodeDiam + VerticiesRadius) ;
-               //Debug.Log("Nodes" + worldpoint);
+                //put this into a function and cal it when the veerticies are made?
+                //kill myself?
+                //god this pain is endl
+                /*  Vector3 worldpoint = new Vector3(MG.VertIsies[i].x, MG.VertIsies[i].y, MG.VertIsies[i].z);*///new Vector3(0, 0, 0) + Vector3.right * (x * nodeDiam + VerticiesRadius) + Vector3.forward * (z * nodeDiam + VerticiesRadius) ;
+                Vector3 worldpoint = new Vector3(MG.VertIsies[i].x, MG.VertIsies[i].y, MG.VertIsies[i].z);                                                                                        //Debug.Log("Nodes" + worldpoint);
                 walkable = !(Physics.CheckSphere(worldpoint, VerticiesRadius, unwalkable));
-                grid[z,x] = new NodeScript(walkable, worldpoint, z ,x  );
-                i++;
+                    grid[z, x] = new NodeScript(walkable, worldpoint, z, x);
+                    i++;
+               
             }
         }
     }

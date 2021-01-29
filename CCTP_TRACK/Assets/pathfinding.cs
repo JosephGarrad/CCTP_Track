@@ -21,7 +21,7 @@ public class pathfinding : MonoBehaviour
     }
     void findpath(Vector3 startPos, Vector3 targetpos)
     {
-        NodeScript startnode = Grid.NodefromWorldPoint(startPos);
+       NodeScript startnode = Grid.NodefromWorldPoint(startPos);
         NodeScript targetnode = Grid.NodefromWorldPoint(targetpos);
         List<NodeScript> openSet = new List<NodeScript>();
         HashSet<NodeScript> closeSet = new HashSet<NodeScript>();

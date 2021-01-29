@@ -19,7 +19,7 @@ public class TrackBuilder :  MonoBehaviour
     {
         MG = TerrainGenerator.gameObject.GetComponent<MeshGenerator>();
         GD = GridScript.gameObject.GetComponent<gride>();
-        ND = NodeScript.gameObject.GetComponent<NodeScript>();
+       // ND = NodeScript.gameObject.GetComponent<NodeScript>();
         Grid = GetComponent<gride>();
 
     }
@@ -33,35 +33,39 @@ public class TrackBuilder :  MonoBehaviour
             Built = true;
         }
     }
-    void build()
-    {
+   void build()
+   {
 
 
 
-            for (int j = 0, z = 0; z <= MG.ZSize; z++)
-           {
-                for (int x = 0; x <= MG.XSize; x++)
-               {
+        for (int j = 0, z = 0; z <= MG.ZSize; z++)
+        {
+            for (int x = 0; x <= MG.XSize; x++)
+            {
 
-              //  Debug.Log("Path X " + GD.path[j].worldPos.x);
-               // Debug.Log("Vert X " + MG.VertIsies[j].x);
-              
+                //  Debug.Log("Path X " + GD.path[j].worldPos.x);
+                // Debug.Log("Vert X " + MG.VertIsies[j].x);
+
                 Vector3 pathVec = new Vector3(GD.path[j].worldPos.x, GD.path[j].worldPos.y, GD.path[j].worldPos.z);
-                if (pathVec.x == MG.VertIsies[j].x )
+                if (pathVec == MG.VertIsies[j])
                 {
                     Debug.Log("cummies");
-                   // Instantiate(Cube, new Vector3(MG.VertIsies[j].x, MG.VertIsies[j].y, MG.VertIsies[j].z), Quaternion.identity);
+                    // Instantiate(Cube, new Vector3(MG.VertIsies[j].x, MG.VertIsies[j].y, MG.VertIsies[j].z), Quaternion.identity);
                 }
                 else
                 {
-                    //Debug.Log("Max");
+                    Debug.Log("Path: " + pathVec);
+                    //Debug.Log("Vert: " + MG.VertIsies[j]);
 
                 }
-
+                if(j == 32)
+                {
+                    Debug.Log("Vert: " + MG.VertIsies[j]);
+                }
                 j++;
             }
-            
+
         }
-        
+
     }
 }

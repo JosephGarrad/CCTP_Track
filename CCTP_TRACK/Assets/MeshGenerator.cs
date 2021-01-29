@@ -20,7 +20,9 @@ public class MeshGenerator : MonoBehaviour
     public float HeightAcrossX;
     public float HeightAcrossZ;
     public float multiplyHeight;
-  
+
+    gride GS;
+    public GameObject Gride;
     public Color[] colorMap;
     public float Freq_1;
     public float Freq_2;
@@ -44,6 +46,7 @@ public class MeshGenerator : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        GS = Gride.gameObject.GetComponent<gride>();
         for (int i = 0; i < VertIsies.Length; i++)
         {
             VertHeight = LandMesh.vertices[i].y;
@@ -54,15 +57,15 @@ public class MeshGenerator : MonoBehaviour
         LandMesh.name = "RaceTrack Terrain";
 
         CreateTerrain();
-         UpdateTerrain();
-       
+        UpdateTerrain();
+      
         placeTrack();
     }
  
     private void Update()
     {
-       
-        
+      
+
     }
 
     void placeTrack()
@@ -77,13 +80,20 @@ public class MeshGenerator : MonoBehaviour
 
         XVert2 = VertIsies[70].x;
         zVert2 = VertIsies[54].z;
-    
 
-           // for (int i = 0; i < mf.mesh.vertices.Length; i++)
+
+        //for (int i = 0; i < mf.mesh.vertices.Length; i++)
         //{
-           startPoint = new Vector3(50, 0, 14/*zVert + 2*/) ;
-            Endpoint = new Vector3(80, 0, 45);
-           // if (startPoint == VertIsies[i])
+        // for (int j = 0, x = 0; x <= XSize; x++)
+        // {
+        //for (int z = 0; z <= ZSize; z++,j++)
+        //{
+        startPoint = new Vector3(XVert, 0, 0/*zVert + 2*/) + Vector3.forward * zVert; // adding 20 spaces onto the z vector
+                Endpoint = new Vector3(XVert2, 0, 0) + Vector3.forward * 10;
+                //j++;
+            //}
+        //}
+            // if (startPoint == VertIsies[i])
            // {
            //     Instantiate(Cube, localtoworld.MultiplyPoint3x4(startPoint) , Quaternion.identity);
            //}
@@ -112,6 +122,7 @@ public class MeshGenerator : MonoBehaviour
                 {
                     minHeight = Elevation;
                 }
+                //GS.createGrid(z, x, j);
                 j++;
 
             }
@@ -191,7 +202,7 @@ public class MeshGenerator : MonoBehaviour
     {
         for(int i = 0; i< VertIsies.Length; i++)
         {
-          // Gizmos.DrawSphere(VertIsies[i],0.05f);
+          //Gizmos.DrawSphere(VertIsies[i],0.5f);
         }
         
     }
