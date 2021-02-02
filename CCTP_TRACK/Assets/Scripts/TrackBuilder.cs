@@ -45,7 +45,7 @@ public class TrackBuilder :  MonoBehaviour
             if(GD.path.Contains(n))
             {
                 Instantiate(Cube, n.worldPos,Quaternion.identity);
-                Debug.Log("placeTRack");
+                //Debug.Log("placeTRack");
             }
         }
 

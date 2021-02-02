@@ -89,7 +89,7 @@ public class MeshGenerator : MonoBehaviour
         //for (int z = 0; z <= ZSize; z++,j++)
         //{
         startPoint = new Vector3(3, 0, 10/*zVert + 2*/) ; // adding 20 spaces onto the z vector
-        Endpoint = new Vector3(0, 0, 71);//+ Vector3.forward * 71;
+        Endpoint = new Vector3(0, 0, 80);//+ Vector3.forward * 71;
                 //j++;
             //}
         //}
