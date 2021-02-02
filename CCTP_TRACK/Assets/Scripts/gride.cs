@@ -18,6 +18,7 @@ public class gride : MonoBehaviour
     public int GridHeight;
     public float VerticiesRadius;
     bool walkable;
+    public GameObject Block;
     public Vector3 worldpoint;
     // Start is called before the first frame update
     private void Start()
@@ -57,8 +58,12 @@ public class gride : MonoBehaviour
                 //kill myself?
                 //god this pain is endl
                 /*  Vector3 worldpoint = new Vector3(MG.VertIsies[i].x, MG.VertIsies[i].y, MG.VertIsies[i].z);*///new Vector3(0, 0, 0) + Vector3.right * (x * nodeDiam + VerticiesRadius) + Vector3.forward * (z * nodeDiam + VerticiesRadius) ;
-                Vector3 worldpoint = new Vector3(MG.VertIsies[i].x, MG.VertIsies[i].y, MG.VertIsies[i].z);                                                                                        //Debug.Log("Nodes" + worldpoint);
-                walkable = !(Physics.CheckSphere(worldpoint, VerticiesRadius, unwalkable));
+                Vector3 worldpoint = new Vector3(MG.VertIsies[i].x, MG.VertIsies[i].y, MG.VertIsies[i].z);
+                if (MG.VertIsies[i].y >= 12)       //Debug.Log("Nodes" + worldpoint);
+                {
+                    Instantiate(Block, MG.VertIsies[i], Quaternion.identity);
+                }
+                    walkable = !(Physics.CheckSphere(worldpoint, VerticiesRadius, unwalkable));
                     grid[z, x] = new NodeScript(walkable, worldpoint, z, x);
                     i++;
                

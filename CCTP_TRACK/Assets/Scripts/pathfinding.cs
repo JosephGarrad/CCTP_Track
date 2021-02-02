@@ -9,6 +9,9 @@ public class pathfinding : MonoBehaviour
     public Transform seeker;
         public  Transform Target;
     public GameObject MeshG;
+    public NodeScript Neighbour;
+    public NodeScript currentNode;
+    public Vector3 TrackRot;
     private void Awake()
     {
         Grid = GetComponent<gride>(); //getting the gride script
@@ -45,27 +48,38 @@ public class pathfinding : MonoBehaviour
                 reTracePath(startnode, targetnode);
                 return;
             }
-            foreach(NodeScript neighbour in Grid.GetNeighbours(currentNode))
+            foreach(NodeScript Neighbour in Grid.GetNeighbours(currentNode))
             {
-                if(!neighbour.walkable || closeSet.Contains(neighbour))
+                if(!Neighbour.walkable || closeSet.Contains(Neighbour))
                 {
                     continue;
                 }
-                int newMovementCostToNeighb = currentNode.gCost + getDistance(currentNode, neighbour);
-                if(newMovementCostToNeighb < neighbour.gCost || !openSet.Contains(neighbour)) // checking to see if the nieghbour has a shorter path then the others or that it is not in the open list
+                int newMovementCostToNeighb = currentNode.gCost + getDistance(currentNode, Neighbour);
+                if(newMovementCostToNeighb < Neighbour.gCost || !openSet.Contains(Neighbour)) // checking to see if the nieghbour has a shorter path then the others or that it is not in the open list
                 { // if the neighbour is shorter then set its cost to the distance it is away from the target node
-                    neighbour.gCost = newMovementCostToNeighb;
-                    neighbour.hCost = getDistance(neighbour,targetnode);
-                    neighbour.parent = currentNode;
+                    Neighbour.gCost = newMovementCostToNeighb;
+                    Neighbour.hCost = getDistance(Neighbour,targetnode);
+                    Neighbour.parent = currentNode;
 
-                    if(!openSet.Contains(neighbour))
+                    if(!openSet.Contains(Neighbour))
                     {
-                        openSet.Add(neighbour);
+                        openSet.Add(Neighbour);
                     }
                 }
 
             }
         }
+    }
+     public Vector3 angleBetweenNode()
+    {
+        float XAngle =Mathf.Atan2(currentNode.worldPos.x, Neighbour.worldPos.x);
+        float YAngle = Mathf.Atan2(currentNode.worldPos.y, Neighbour.worldPos.y);
+        float Zangle = Mathf.Atan2( currentNode.worldPos.z , Neighbour.worldPos.z);
+
+        TrackRot = new Vector3(XAngle, YAngle, Zangle);
+
+        return TrackRot;
+
     }
 
     void reTracePath(NodeScript startnode, NodeScript endnode)
