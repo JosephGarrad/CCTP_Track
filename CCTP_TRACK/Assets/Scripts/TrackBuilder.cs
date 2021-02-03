@@ -11,11 +11,17 @@ public class TrackBuilder :  MonoBehaviour
     public GameObject GridScript;
     public GameObject Pathfinding;
     pathfinding PS;
-    NodeScript ND;
-    public GameObject NodeScript;
+    //NodeScript ND;
+    //public GameObject NodeScript;
     public GameObject Cube;
     bool Built = false;
+    private GameObject rTrack;
     gride Grid;
+    int endpeice;
+    private int Tracknum;
+    private Vector3 Direction;
+    private Quaternion LookRotation;
+    public List<GameObject> TrackPeices = new List<GameObject>();
     //int offset = 197;
     // Start is called before the first frame update
     void Start()
@@ -36,47 +42,50 @@ public class TrackBuilder :  MonoBehaviour
             build();
             Built = true;
         }
+       
     }
    void build()
    {
-
-        foreach (NodeScript n in GD.grid)
-        {
-            if(GD.path.Contains(n))
+        
+            foreach (NodeScript n in GD.grid)
             {
-                Instantiate(Cube, n.worldPos,Quaternion.identity);
-                //Debug.Log("placeTRack");
+                if (GD.path.Contains(n) )
+                {
+                rTrack = Instantiate(Cube, n.worldPos, Quaternion.identity);
+                TrackPeices.Add(rTrack);
+                Direction =  (rTrack.transform.position -TrackPeices[Tracknum + 1].gameObject.transform.position ).normalized;
+                LookRotation = Quaternion.LookRotation(Direction);
+
+
+                rTrack.transform.localRotation = Quaternion.LookRotation(Direction);
+
+                // rTrack.transform.LookAt(TrackPeices[Tracknum+1].gameObject.transform.position);
+
+
+                // rTrack = Instantiate(Cube, n.worldPos, Quaternion.identity);
+                // TrackPeices.Add(rTrack);
+
+                // Vector3 direction = (TrackPeices[Tracknum + 1].gameObject.transform.position - rTrack.transform.position).normalized;
+                // float distance = Vector3.Distance(rTrack.transform.position, TrackPeices[Tracknum + 1].gameObject.transform.position);
+                // float angle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg;
+
+                // //rectTransform.anchoredPosition = dotPositionA + direction * distance * 0.5f; // Placed in middle between A + B
+                // //rTrack.transform.localScale = new Vector3(distance, transform.localScale.x, transform.localScale.z);
+                ////rTrack.transform.localEulerAngles = new Vector3(angle, angle,angle);
+
+                // Debug.Log(angle);
+
+
+                if (Tracknum <= TrackPeices.Count)
+                    continue;
+
+                Tracknum++;
+           
             }
         }
 
-        //for (int j = 0, z = 0; z <= MG.ZSize; z++)
-        //{
-        //    for (int x = 0; x <= MG.XSize; x++)
-        //    {
-
-        //        //  Debug.Log("Path X " + GD.path[j].worldPos.x);
-        //        // Debug.Log("Vert X " + MG.VertIsies[j].x);
-
-        //        Vector3 pathVec = new Vector3(GD.path[j].worldPos.x, GD.path[j].worldPos.y, GD.path[j].worldPos.z);
-        //        if (pathVec == MG.VertIsies[j])
-        //        {
-        //            Debug.Log("cummies");
-        //            // Instantiate(Cube, new Vector3(MG.VertIsies[j].x, MG.VertIsies[j].y, MG.VertIsies[j].z), Quaternion.identity);
-        //        }
-        //        else
-        //        {
-        //            //Debug.Log("Path: " + pathVec);
-        //            //Debug.Log("Vert: " + MG.VertIsies[j]);
-
-        //        }
-        //        //if(j == 32)
-        //        {
-        //            Debug.Log("Vert: " + MG.VertIsies[j]);
-        //        }
-        //        j++;
-        //    }
-
-        //}
-
+        
+        endpeice =TrackPeices.Count;
+    
     }
 }

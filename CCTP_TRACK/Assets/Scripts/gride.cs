@@ -59,7 +59,7 @@ public class gride : MonoBehaviour
                 //god this pain is endl
                 /*  Vector3 worldpoint = new Vector3(MG.VertIsies[i].x, MG.VertIsies[i].y, MG.VertIsies[i].z);*///new Vector3(0, 0, 0) + Vector3.right * (x * nodeDiam + VerticiesRadius) + Vector3.forward * (z * nodeDiam + VerticiesRadius) ;
                 Vector3 worldpoint = new Vector3(MG.VertIsies[i].x, MG.VertIsies[i].y, MG.VertIsies[i].z);
-                if (MG.VertIsies[i].y >= 14 || MG.VertIsies[i].y <= 3)     //Debug.Log("Nodes" + worldpoint);
+                if (MG.VertIsies[i].y >= 14 || MG.VertIsies[i].y <= 5)     //Debug.Log("Nodes" + worldpoint);
                 {
                     Instantiate(Block, MG.VertIsies[i], Quaternion.identity);
                 }

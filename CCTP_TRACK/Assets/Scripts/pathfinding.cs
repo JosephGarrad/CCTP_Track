@@ -70,17 +70,7 @@ public class pathfinding : MonoBehaviour
             }
         }
     }
-     public Vector3 angleBetweenNode()
-    {
-        float XAngle =Mathf.Atan2(currentNode.worldPos.x, Neighbour.worldPos.x);
-        float YAngle = Mathf.Atan2(currentNode.worldPos.y, Neighbour.worldPos.y);
-        float Zangle = Mathf.Atan2( currentNode.worldPos.z , Neighbour.worldPos.z);
-
-        TrackRot = new Vector3(XAngle, YAngle, Zangle);
-
-        return TrackRot;
-
-    }
+    
 
     void reTracePath(NodeScript startnode, NodeScript endnode)
     {
