@@ -962,7 +962,8 @@ MonoBehaviour:
   seeker: {fileID: 909808983}
   Target: {fileID: 511924241}
   MeshG: {fileID: 289922950}
-  TrackRot: {x: 0, y: 0, z: 0}
+  Hill_Amount: 15
   HillMovementCostToNeighb: 0
   Hilly_track: 1
+  Quickest_track: 0
   flat_track: 0
