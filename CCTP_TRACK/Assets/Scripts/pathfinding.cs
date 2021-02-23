@@ -12,6 +12,11 @@ public class pathfinding : MonoBehaviour
     public NodeScript Neighbour;
     public NodeScript currentNode;
     public Vector3 TrackRot;
+
+    public int HillMovementCostToNeighb;
+
+    public bool Hilly_track;
+    public bool flat_track;
     private void Awake()
     {
         Grid = GetComponent<gride>(); //getting the gride script
@@ -48,29 +53,61 @@ public class pathfinding : MonoBehaviour
                 reTracePath(startnode, targetnode);
                 return;
             }
-            foreach(NodeScript Neighbour in Grid.GetNeighbours(currentNode))
+            if (flat_track)
             {
-                if(!Neighbour.walkable || closeSet.Contains(Neighbour))
+                foreach (NodeScript Neighbour in Grid.GetNeighbours(currentNode))
                 {
-                    continue;
-                }
-                int newMovementCostToNeighb = currentNode.gCost + getDistance(currentNode, Neighbour);
-                if(newMovementCostToNeighb < Neighbour.gCost || !openSet.Contains(Neighbour)) // checking to see if the nieghbour has a shorter path then the others or that it is not in the open list
-                { // if the neighbour is shorter then set its cost to the distance it is away from the target node
-                    Neighbour.gCost = newMovementCostToNeighb;
-                    Neighbour.hCost = getDistance(Neighbour,targetnode);
-                    Neighbour.parent = currentNode;
-
-                    if(!openSet.Contains(Neighbour))
+                    if (!Neighbour.walkable || closeSet.Contains(Neighbour))
                     {
-                        openSet.Add(Neighbour);
+                        continue;
                     }
-                }
+                    int newMovementCostToNeighb = currentNode.gCost + getDistance(currentNode, Neighbour);
+                    if (newMovementCostToNeighb < Neighbour.gCost || !openSet.Contains(Neighbour)) // checking to see if the nieghbour has a shorter path then the others or that it is not in the open list
+                    { // if the neighbour is shorter then set its cost to the distance it is away from the target node
+                        Neighbour.gCost = newMovementCostToNeighb;
+                        Neighbour.hCost = getDistance(Neighbour, targetnode);
+                        Neighbour.parent = currentNode;
 
+                        if (!openSet.Contains(Neighbour))
+                        {
+                            openSet.Add(Neighbour);
+                        }
+                    }
+
+                }
+            }
+            if (Hilly_track)
+            {
+                foreach (NodeScript Neighbour in Grid.GetNeighbours(currentNode))
+                {
+                  
+                    if (!Neighbour.walkable || closeSet.Contains(Neighbour))
+                    {
+                        continue;
+                    }
+                    if (Neighbour.worldPos.y < currentNode.worldPos.y)
+                    {
+                        currentNode.gCost += 20;
+                        HillMovementCostToNeighb = currentNode.gCost + 20 + getDistance(currentNode, Neighbour); 
+                    }
+                    int newMovementCostToNeighb = currentNode.gCost + getDistance(currentNode, Neighbour);
+                    if (newMovementCostToNeighb < Neighbour.gCost || !openSet.Contains(Neighbour)) // checking to see if the nieghbour has a shorter path then the others or that it is not in the open list
+                    { // if the neighbour is shorter then set its cost to the distance it is away from the target node
+                        Neighbour.gCost = HillMovementCostToNeighb;
+                        Neighbour.hCost = getDistance(Neighbour, targetnode);
+                        Neighbour.parent = currentNode;
+
+                        if (!openSet.Contains(Neighbour))
+                        {
+                            openSet.Add(Neighbour);
+                        }
+                    }
+
+                }
             }
         }
     }
-    
+    //somewhere above i need to create a function that chnages the cost of the neghbour is they have a higher y position
 
     void reTracePath(NodeScript startnode, NodeScript endnode)
     {

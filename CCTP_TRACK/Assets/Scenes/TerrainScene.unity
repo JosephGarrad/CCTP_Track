@@ -524,8 +524,8 @@ MonoBehaviour:
   TerrainGenerator: {fileID: 289922950}
   GridScript: {fileID: 2007823583}
   Pathfinding: {fileID: 0}
-  NodeScript: {fileID: 2007823583}
   Cube: {fileID: 7442739914693784108, guid: 4c5c6c72ff6cd4847a92320fd9885cb2, type: 3}
+  TrackPeices: []
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -931,6 +931,8 @@ MonoBehaviour:
   VerticiesRadius: 1
   Block: {fileID: 1928923728106913065, guid: ffedfa90cc1f5474abe000875b3a6f81, type: 3}
   worldpoint: {x: 0, y: 0, z: 0}
+  maxHeight: 20
+  minDepth: 0
 --- !u!4 &2007823586
 Transform:
   m_ObjectHideFlags: 0
@@ -961,3 +963,6 @@ MonoBehaviour:
   Target: {fileID: 511924241}
   MeshG: {fileID: 289922950}
   TrackRot: {x: 0, y: 0, z: 0}
+  HillMovementCostToNeighb: 0
+  Hilly_track: 1
+  flat_track: 0
