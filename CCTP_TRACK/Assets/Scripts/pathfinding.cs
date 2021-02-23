@@ -11,11 +11,15 @@ public class pathfinding : MonoBehaviour
     public GameObject MeshG;
     public NodeScript Neighbour;
     public NodeScript currentNode;
-    public Vector3 TrackRot;
+    private Vector3 TrackRot;
+
+    public int Hill_Amount;
 
     public int HillMovementCostToNeighb;
+    private int FlatMovementCostToNeighb;
 
     public bool Hilly_track;
+    public bool Quickest_track;
     public bool flat_track;
     private void Awake()
     {
@@ -53,7 +57,7 @@ public class pathfinding : MonoBehaviour
                 reTracePath(startnode, targetnode);
                 return;
             }
-            if (flat_track)
+            if (Quickest_track)
             {
                 foreach (NodeScript Neighbour in Grid.GetNeighbours(currentNode))
                 {
@@ -85,15 +89,21 @@ public class pathfinding : MonoBehaviour
                     {
                         continue;
                     }
-                    if (Neighbour.worldPos.y < currentNode.worldPos.y)
-                    {
-                        currentNode.gCost += 20;
-                        HillMovementCostToNeighb = currentNode.gCost + 20 + getDistance(currentNode, Neighbour); 
-                    }
+                  
                     int newMovementCostToNeighb = currentNode.gCost + getDistance(currentNode, Neighbour);
                     if (newMovementCostToNeighb < Neighbour.gCost || !openSet.Contains(Neighbour)) // checking to see if the nieghbour has a shorter path then the others or that it is not in the open list
                     { // if the neighbour is shorter then set its cost to the distance it is away from the target node
-                        Neighbour.gCost = HillMovementCostToNeighb;
+                        if (Neighbour.worldPos.y < currentNode.worldPos.y)
+                        {
+                            currentNode.gCost += Hill_Amount;
+                            HillMovementCostToNeighb = currentNode.gCost + getDistance(currentNode, Neighbour);
+                            Neighbour.gCost = HillMovementCostToNeighb;
+                        }
+                        else
+                        {
+                            Neighbour.gCost = newMovementCostToNeighb;
+                        }
+                        
                         Neighbour.hCost = getDistance(Neighbour, targetnode);
                         Neighbour.parent = currentNode;
 
@@ -105,6 +115,41 @@ public class pathfinding : MonoBehaviour
 
                 }
             }
+           /* if (flat_track)
+            {
+                foreach (NodeScript Neighbour in Grid.GetNeighbours(currentNode))
+                {
+
+                    if (!Neighbour.walkable || closeSet.Contains(Neighbour))
+                    {
+                        continue;
+                    }
+
+                    int newMovementCostToNeighb = currentNode.gCost + getDistance(currentNode, Neighbour);
+                    if (newMovementCostToNeighb < Neighbour.gCost || !openSet.Contains(Neighbour)) // checking to see if the nieghbour has a shorter path then the others or that it is not in the open list
+                    { // if the neighbour is shorter then set its cost to the distance it is away from the target node
+                        if (Neighbour.worldPos.y > currentNode.worldPos.y)
+                        {
+                            //currentNode.gCost -= 20;
+                            FlatMovementCostToNeighb = currentNode.gCost - 10 + getDistance(currentNode, Neighbour);
+                            Neighbour.gCost = FlatMovementCostToNeighb;
+                        }
+                        else
+                        {
+                            Neighbour.gCost = newMovementCostToNeighb;
+                        }
+
+                        Neighbour.hCost = getDistance(Neighbour, targetnode);
+                        Neighbour.parent = currentNode;
+
+                        if (!openSet.Contains(Neighbour))
+                        {
+                            openSet.Add(Neighbour);
+                        }
+                    }
+
+                }
+            }*/
         }
     }
     //somewhere above i need to create a function that chnages the cost of the neghbour is they have a higher y position
