@@ -12,7 +12,7 @@ public class pathfinding : MonoBehaviour
     public NodeScript Neighbour;
     public NodeScript currentNode;
     private Vector3 TrackRot;
-
+    public int Retries = 0;
     public int Hill_Amount;
 
     public int HillMovementCostToNeighb;
@@ -29,6 +29,7 @@ public class pathfinding : MonoBehaviour
     void Update()
     {
         findpath(MS.startPoint, MS.Endpoint);
+        retry_track();
        // Debug.Log("seker" + seeker.position);
     }
     void findpath(Vector3 startPos, Vector3 targetpos)
@@ -44,7 +45,7 @@ public class pathfinding : MonoBehaviour
             NodeScript currentNode = openSet[0];
             for(int i = 1; i < openSet.Count; i++)
             {
-                if(openSet[i].fcost < currentNode.fcost || openSet[i].fcost == currentNode.fcost && openSet[i].hCost < currentNode.hCost) // checking to see if the next node has a lower cost, if it does make it the current node
+                if( Retries == 0 && openSet[i].fcost < currentNode.fcost || openSet[i].fcost == currentNode.fcost && openSet[i].hCost < currentNode.hCost) // checking to see if the next node has a lower cost, if it does make it the current node
                 {
                     currentNode = openSet[i];
                 }
@@ -183,5 +184,15 @@ public class pathfinding : MonoBehaviour
             return 14 * distanceX + 10 * (distanceZ - distanceX);
         }
         
+    }
+
+    void retry_track()
+    {
+        if(Input.GetKeyDown(KeyCode.R))
+        {
+           
+            Retries += 1;
+            findpath(MS.startPoint, MS.Endpoint);
+        }
     }
 }
