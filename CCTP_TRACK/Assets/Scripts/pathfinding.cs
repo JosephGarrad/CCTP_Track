@@ -32,14 +32,15 @@ public class pathfinding : MonoBehaviour
     }
     void Update()
     {
-        findpath(MS.startPoint, MS.Endpoint);
+        findpath(MS.startPoint, MS.Endpoint,MS.MidPoint);
         retry_track();
        // Debug.Log("seker" + seeker.position);
     }
-    void findpath(Vector3 startPos, Vector3 targetpos)
+    void findpath(Vector3 startPos, Vector3 targetpos, Vector3 MidPointPos)
     {
        NodeScript startnode = Grid.NodefromWorldPoint(startPos);
         NodeScript targetnode = Grid.NodefromWorldPoint(targetpos);
+        NodeScript MidPointnode = Grid.NodefromWorldPoint(MidPointPos);
         List<NodeScript> openSet = new List<NodeScript>();
         HashSet<NodeScript> closeSet = new HashSet<NodeScript>();
         openSet.Add(startnode);
@@ -59,12 +60,33 @@ public class pathfinding : MonoBehaviour
             openSet.Remove(currentNode); // when you move to the next node taske the cuuent node out of the open list so we cant go back to it 
             closeSet.Add(currentNode); // add to the closed list so we know its been tested;
 
-            if(currentNode == targetnode) // if we have hit out target then we are complete and leave the loop
+            //if(currentNode == targetnode) // if we have hit out target then we are complete and leave the loop
+            //{
+
+            //    reTracePath(startnode, targetnode);
+
+            //    return;
+            //}
+
+            //if (currentNode == MidPointnode)
+            //{
+            //    reTracePath(startnode, MidPointnode);
+            //    Debug.Log(targetnode.worldPos);
+            //    targetnode = startnode;
+            //    startnode = MidPointnode;
+            //    Debug.Log(targetnode.worldPos);
+            //    return;
+            //    //reTracePath(MidPointnode, targetnode);
+            //}
+            if (currentNode == targetnode) // if we have hit out target then we are complete and leave the loop
             {
+
                 reTracePath(startnode, targetnode);
-                
+
                 return;
             }
+
+
             if (Quickest_track)
             {
                 foreach (NodeScript Neighbour in Grid.GetNeighbours(currentNode))
@@ -101,9 +123,9 @@ public class pathfinding : MonoBehaviour
                     }
                   
                     int newMovementCostToNeighb = currentNode.gCost + getDistance(currentNode, Neighbour);
-                    if (newMovementCostToNeighb < Neighbour.gCost || !openSet.Contains(Neighbour)) // checking to see if the nieghbour has a shorter path then the others or that it is not in the open list
+                    if (newMovementCostToNeighb < Neighbour.gCost || !openSet.Contains(Neighbour))// && currentNode.worldPos.y! < currentNode.parent.worldPos.y) // checking to see if the nieghbour has a shorter path then the others or that it is not in the open list
                     { // if the neighbour is shorter then set its cost to the distance it is away from the target node
-                        if (Neighbour.worldPos.y < currentNode.worldPos.y)
+                        if (Neighbour.worldPos.y < currentNode.worldPos.y  )
                         {
                             currentNode.gCost += Hill_Amount;
                             HillMovementCostToNeighb = currentNode.gCost + getDistance(currentNode, Neighbour);
@@ -166,7 +188,7 @@ public class pathfinding : MonoBehaviour
         {
            
             Retries += 1;
-            findpath(MS.startPoint, MS.Endpoint);
+            findpath(MS.startPoint, MS.Endpoint, MS.MidPoint);
         }
     }
 }

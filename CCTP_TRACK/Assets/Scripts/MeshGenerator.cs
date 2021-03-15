@@ -43,6 +43,7 @@ public class MeshGenerator : MonoBehaviour
     public float VertHeight;
     public Vector3 startPoint;
     public Vector3 Endpoint;
+    public Vector3 MidPoint;
     // Start is called before the first frame update
     void Start()
     {
@@ -90,6 +91,7 @@ public class MeshGenerator : MonoBehaviour
         //{
         startPoint = new Vector3(3, 0, 10/*zVert + 2*/) ; // adding 20 spaces onto the z vector
         Endpoint = new Vector3(0, 0, 150);//+ Vector3.forward * 71;
+        MidPoint = new Vector3(0, 0, 150);
                 //j++;
             //}
         //}

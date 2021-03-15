@@ -965,7 +965,7 @@ MonoBehaviour:
   Target: {fileID: 511924241}
   MeshG: {fileID: 289922950}
   Retries: 0
-  Hill_Amount: 15
+  Hill_Amount: 2
   HillMovementCostToNeighb: 0
   Hilly_track: 1
   Quickest_track: 0
