@@ -21,6 +21,8 @@ public class pathfinding : MonoBehaviour
     public bool Hilly_track;
     public bool Quickest_track;
     public bool flat_track;
+    public bool straightTrack;
+    public bool CircuitTrack;
     private void Awake()
     {
         Grid = GetComponent<gride>(); //getting the gride script
@@ -81,7 +83,7 @@ public class pathfinding : MonoBehaviour
             if (currentNode == targetnode) // if we have hit out target then we are complete and leave the loop
             {
 
-                reTracePath(startnode, targetnode);
+                reTracePath(startnode, targetnode,MidPointnode);
 
                 return;
             }
@@ -151,20 +153,37 @@ public class pathfinding : MonoBehaviour
     }
     //somewhere above i need to create a function that chnages the cost of the neghbour is they have a higher y position
 
-    void reTracePath(NodeScript startnode, NodeScript endnode)
+    void reTracePath(NodeScript startnode, NodeScript endnode, NodeScript midpoint)
     {
-       
-        //Debug.Log(path[path.Count]);
-        NodeScript currentNode = endnode;
-        while(currentNode != startnode)
+       if(straightTrack)
         {
-            path.Add(currentNode);
-            
-            currentNode = currentNode.parent;
+            //Debug.Log(path[path.Count]);
+            NodeScript currentNode = endnode;
+            while (currentNode != startnode)
+            {
+                path.Add(currentNode);
 
+                currentNode = currentNode.parent;
+
+            }
+            if (CircuitTrack)
+            {
+                Debug.Log("imFat and gay");
+                NodeScript currentNode2 = midpoint; // starts form the end 
+                while (currentNode2 != startnode) //while its not the fist node 
+                {
+                    path.Add(currentNode2); //add the node 
+
+                    currentNode2 = currentNode2.parent; //make the last one the parent 
+
+                }
+                path.Reverse(); //then reverse it
+                Grid.path = path;
+            }
+            path.Reverse();
+            Grid.path = path;
         }
-       path.Reverse();
-        Grid.path = path;
+        
     }
     int getDistance(NodeScript a, NodeScript b)
     {
