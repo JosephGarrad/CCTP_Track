@@ -23,6 +23,11 @@ public class pathfinding : MonoBehaviour
     public bool flat_track;
     public bool straightTrack;
     public bool CircuitTrack;
+
+    public Vector3 midPoint;
+   
+
+    public bool Mid_Hit;
     private void Awake()
     {
         Grid = GetComponent<gride>(); //getting the gride script
@@ -30,22 +35,23 @@ public class pathfinding : MonoBehaviour
     }
     private void Start()
     {
-        
+        midPoint = MS.MidPoint;
     }
     void Update()
     {
-        findpath(MS.startPoint, MS.Endpoint,MS.MidPoint);
+        findpath(MS.startPoint, MS.Endpoint);
+        findpath(MS.Endpoint, MS.startPoint);
         retry_track();
        // Debug.Log("seker" + seeker.position);
     }
-    void findpath(Vector3 startPos, Vector3 targetpos, Vector3 MidPointPos)
+    void findpath(Vector3 startPos, Vector3 targetpos)
     {
        NodeScript startnode = Grid.NodefromWorldPoint(startPos);
         NodeScript targetnode = Grid.NodefromWorldPoint(targetpos);
-        NodeScript MidPointnode = Grid.NodefromWorldPoint(MidPointPos);
-        List<NodeScript> openSet = new List<NodeScript>();
-        HashSet<NodeScript> closeSet = new HashSet<NodeScript>();
-        openSet.Add(startnode);
+        NodeScript MidPointnode = Grid.NodefromWorldPoint(midPoint);
+     List<NodeScript> openSet = new List<NodeScript>();
+     HashSet<NodeScript> closeSet = new HashSet<NodeScript>();
+    openSet.Add(startnode);
 
         while(openSet.Count > 0 )
         {
@@ -80,11 +86,12 @@ public class pathfinding : MonoBehaviour
             //    return;
             //    //reTracePath(MidPointnode, targetnode);
             //}
+
             if (currentNode == targetnode) // if we have hit out target then we are complete and leave the loop
             {
-
-                reTracePath(startnode, targetnode,MidPointnode);
-
+                Debug.Log("end hit");
+                reTracePath(startnode, targetnode);
+                //startnode = targetnode;
                 return;
             }
 
@@ -153,9 +160,9 @@ public class pathfinding : MonoBehaviour
     }
     //somewhere above i need to create a function that chnages the cost of the neghbour is they have a higher y position
 
-    void reTracePath(NodeScript startnode, NodeScript endnode, NodeScript midpoint)
+    void reTracePath(NodeScript startnode, NodeScript endnode)
     {
-       if(straightTrack)
+        if (straightTrack)
         {
             //Debug.Log(path[path.Count]);
             NodeScript currentNode = endnode;
@@ -166,24 +173,35 @@ public class pathfinding : MonoBehaviour
                 currentNode = currentNode.parent;
 
             }
-            if (CircuitTrack)
-            {
-                Debug.Log("imFat and gay");
-                NodeScript currentNode2 = midpoint; // starts form the end 
-                while (currentNode2 != startnode) //while its not the fist node 
-                {
-                    path.Add(currentNode2); //add the node 
-
-                    currentNode2 = currentNode2.parent; //make the last one the parent 
-
-                }
-                path.Reverse(); //then reverse it
-                Grid.path = path;
-            }
             path.Reverse();
             Grid.path = path;
         }
-        
+        //if (CircuitTrack)
+        //{
+        //    NodeScript currentNode2 = midpoint;
+        //    while (currentNode2 != startnode)
+        //    {
+        //        path.Add(currentNode2);
+
+        //        currentNode2 = currentNode2.parent;
+        //        Debug.Log("imFat and gay");
+        //    }
+        //    path.Reverse();
+        //   Grid.path = path;
+        //    if (Mid_Hit)
+        //    {
+        //        NodeScript currentNode = startnode; // starts form the end 
+        //        while (currentNode != midpoint) //while its not the fist node 
+        //        {
+        //            path.Add(currentNode); //add the node 
+
+        //            currentNode = currentNode.parent; //make the last one the parent 
+        //            Debug.Log("imFat and gay2");
+        //        }
+        //        path.Reverse(); //then reverse it
+        //        Grid.path = path;
+        //    }
+        //}
     }
     int getDistance(NodeScript a, NodeScript b)
     {
@@ -207,7 +225,7 @@ public class pathfinding : MonoBehaviour
         {
            
             Retries += 1;
-            findpath(MS.startPoint, MS.Endpoint, MS.MidPoint);
+            findpath(MS.startPoint, MS.Endpoint);
         }
     }
 }
