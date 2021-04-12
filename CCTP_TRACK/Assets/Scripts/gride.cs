@@ -18,6 +18,7 @@ public class gride : MonoBehaviour
     public int GridHeight;
     public float VerticiesRadius;
     bool walkable;
+    private int Tracksize = 1;
     public GameObject Block;
     public Vector3 worldpoint;
     public int maxHeight;
@@ -30,9 +31,9 @@ public class gride : MonoBehaviour
 
 
 
-        nodeDiam = VerticiesRadius;
-       // GridXsize = Mathf.RoundToInt(Worldsize.x / nodeDiam);
-       // GridZsize = Mathf.RoundToInt(Worldsize.y / nodeDiam);
+       nodeDiam = VerticiesRadius*1;
+       //GridXsize = Mathf.RoundToInt(Worldsize.x / nodeDiam);
+        //GridZsize = Mathf.RoundToInt(Worldsize.y / nodeDiam);
         GridXsize = MG.XSize;
         GridZsize = MG.ZSize;
 
@@ -40,34 +41,37 @@ public class gride : MonoBehaviour
     private void Update()
     {
         createGrid();
+        Debug.Log(GridXsize);
     }
     public void createGrid()
 
     {
-        
-        grid = new NodeScript[GridZsize, GridXsize];
+       
+        grid = new NodeScript[GridXsize, GridZsize];
+        Vector3 BottomLeft = transform.position - Vector3.right * Worldsize.x / 2 - Vector3.forward * Worldsize.z / 2;
         for (int i = 0; i < MG.VertIsies.Length; i++)
         {
            
         }
-        for (int i = 0, z = 0; z < GridZsize;z++)
+        for (int i = 0, x = 0; x < GridXsize;x++)
         {
             
 
-            for (int  x = 0; x < GridXsize; x++)
+            for (int  z = 0; z < GridZsize; z++)
             {
                 //put this into a function and cal it when the veerticies are made?
                 //kill myself?
                 //god this pain is endl
-                /*  Vector3 worldpoint = new Vector3(MG.VertIsies[i].x, MG.VertIsies[i].y, MG.VertIsies[i].z);*///new Vector3(0, 0, 0) + Vector3.right * (x * nodeDiam + VerticiesRadius) + Vector3.forward * (z * nodeDiam + VerticiesRadius) ;
+                 //Vector3 worldpoint = BottomLeft + Vector3.right * (x * nodeDiam + VerticiesRadius) + Vector3.forward * (z * nodeDiam + VerticiesRadius) ;
                 Vector3 worldpoint = new Vector3(MG.VertIsies[i].x, MG.VertIsies[i].y, MG.VertIsies[i].z);
                 if (MG.VertIsies[i].y >= maxHeight || MG.VertIsies[i].y <= minDepth)     //Debug.Log("Nodes" + worldpoint);
                {
                 Instantiate(Block, MG.VertIsies[i], Quaternion.identity);
                 }
-            
+                float PosX = x * Tracksize;
+                float posZ = z * -Tracksize;
                 walkable = !(Physics.CheckSphere(worldpoint, VerticiesRadius, unwalkable));
-                    grid[z, x] = new NodeScript(walkable, worldpoint, z, x);
+                    grid[x, z] = new NodeScript(walkable, worldpoint, x, z);
                     i++;
                
             }
@@ -102,15 +106,16 @@ public class gride : MonoBehaviour
     public NodeScript NodefromWorldPoint(Vector3 worldPos) // getting the position of the current node aka player node
     {
         //float percentx = (worldPos.x + Worldsize.x /2) / Worldsize.x;
-        //float percentz = (worldPos.z + Worldsize.y/2) / Worldsize.y;
-        //percentx = Mathf.Clamp01(percentx); // clamping an nomralising the position. 
-        //percentz = Mathf.Clamp01(percentz);
+       // float percentz = (worldPos.z + Worldsize.y/2) / Worldsize.y;
+       // percentx = Mathf.Clamp01(percentx); // clamping an nomralising the position. 
+       // percentz = Mathf.Clamp01(percentz);
 
-        int x = (int)worldPos.x; //Mathf.RoundToInt((GridXsize - 1) * percentx);
+        int x = (int)worldPos.x;  
+       // int x = Mathf.RoundToInt((GridXsize - 1) * percentx);
         int z = (int)worldPos.z;
-        //int y = (int)worldPos.y;//Mathf.RoundToInt((GridZsize - 1) * percentz);
+       // int z = Mathf.RoundToInt((GridZsize - 1) * percentz);
         //Debug.Log(worldPos);
-        return grid[z, x];
+        return grid[x, z];
        
     }
 

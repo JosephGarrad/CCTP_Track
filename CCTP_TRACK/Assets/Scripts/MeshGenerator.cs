@@ -44,6 +44,7 @@ public class MeshGenerator : MonoBehaviour
     public Vector3 startPoint;
     public Vector3 Endpoint;
     public Vector3 MidPoint;
+    public Vector3 Otherpoint;
     // Start is called before the first frame update
     void Start()
     {
@@ -82,23 +83,29 @@ public class MeshGenerator : MonoBehaviour
         XVert2 = VertIsies[70].x;
         zVert2 = VertIsies[54].z;
 
-
+        int zPos = Random.Range(0, 40000);
+        int xPos = Random.Range(0, 40000);
+        int zPos1 = Random.Range(1, 100);
+        int xPos1 = Random.Range(1, 100);
         //for (int i = 0; i < mf.mesh.vertices.Length; i++)
         //{
         // for (int j = 0, x = 0; x <= XSize; x++)
         // {
         //for (int z = 0; z <= ZSize; z++,j++)
         //{
-        startPoint = new Vector3(3, 0, 10/*zVert + 2*/) ; // adding 20 spaces onto the z vector
-        Endpoint = new Vector3(0, 0, 150);//+ Vector3.forward * 71;
-        MidPoint = new Vector3(0, 0, 150);
-                //j++;
-            //}
+        startPoint = new Vector3(VertIsies[30].x, 0, VertIsies[30].z); // new Vector3(10, 0, 3/*zVert + 2*/) ; // adding 20 spaces onto the z vector
+        Endpoint = new Vector3(VertIsies[150].x, 0, 0);//+ Vector3.forward * 71;
+        MidPoint = new Vector3(VertIsies[xPos].x, 0, VertIsies[xPos].y);
+        Otherpoint = new Vector3(VertIsies[zPos].x, 0, VertIsies[zPos].y); // make the position a verticie
+        Debug.Log(xPos);
+        Debug.Log(zPos);
+        //j++;
         //}
-            // if (startPoint == VertIsies[i])
-           // {
-           //     Instantiate(Cube, localtoworld.MultiplyPoint3x4(startPoint) , Quaternion.identity);
-           //}
+        //}
+        // if (startPoint == VertIsies[i])
+        // {
+        //     Instantiate(Cube, localtoworld.MultiplyPoint3x4(startPoint) , Quaternion.identity);
+        //}
 
 
         //}

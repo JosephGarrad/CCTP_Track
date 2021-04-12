@@ -23,9 +23,9 @@ public class pathfinding : MonoBehaviour
     public bool flat_track;
     public bool straightTrack;
     public bool CircuitTrack;
-
+    public GameObject StartPoint;
     public Vector3 midPoint;
-   
+    List<Vector3> Points = new List<Vector3>();
 
     public bool Mid_Hit;
     private void Awake()
@@ -36,17 +36,38 @@ public class pathfinding : MonoBehaviour
     private void Start()
     {
         midPoint = MS.MidPoint;
+        Points.Add(MS.startPoint);
+        Points.Add(MS.MidPoint);
+        Points.Add(MS.Otherpoint);
+        Points.Add(MS.Endpoint);
+
     }
     void Update()
     {
-        findpath(MS.startPoint, MS.Endpoint);
-        findpath(MS.Endpoint, MS.startPoint);
+        ///  findpath(MS.startPoint, MS.MidPoint);//
+        //  findpath(MS.MidPoint, MS.Otherpoint);//
+        // findpath(MS.Otherpoint, MS.Endpoint);// Make a function that loops through and store the points rather than calling the function a set amount of times
+        // findpath(MS.Endpoint, MS.startPoint);//
+        for (int i = 0; i < 4; i++)
+        {
+            ToNextPoint(Points[i],Points[i+1]);
+        }
         retry_track();
        // Debug.Log("seker" + seeker.position);
     }
+
+   void ToNextPoint(Vector3 Currentpoint, Vector3 NextPoint)
+    {
+        //for(int i = 0; i< 4; i++)
+        //{
+           // Currentpoint = Points[i];
+           // NextPoint = Points[i + 1];
+            findpath(Currentpoint, NextPoint);
+        //}
+    }
     void findpath(Vector3 startPos, Vector3 targetpos)
     {
-       NodeScript startnode = Grid.NodefromWorldPoint(startPos);
+        NodeScript startnode = Grid.NodefromWorldPoint(startPos);
         NodeScript targetnode = Grid.NodefromWorldPoint(targetpos);
         NodeScript MidPointnode = Grid.NodefromWorldPoint(midPoint);
      List<NodeScript> openSet = new List<NodeScript>();
@@ -58,7 +79,7 @@ public class pathfinding : MonoBehaviour
             NodeScript currentNode = openSet[0];
             for(int i = 1; i < openSet.Count; i++)
             {
-                if(Retries == 0 && openSet[i].fcost < currentNode.fcost || openSet[i].fcost == currentNode.fcost && openSet[i].hCost < currentNode.hCost) // checking to see if the next node has a lower cost, if it does make it the current node
+                if (Retries == 0 && openSet[i].fcost < currentNode.fcost || openSet[i].fcost == currentNode.fcost && openSet[i].hCost < currentNode.hCost && !openSet.Contains(currentNode)) // checking to see if the next node has a lower cost, if it does make it the current node
                 {
                     currentNode = openSet[i];
                   
