@@ -83,8 +83,8 @@ public class MeshGenerator : MonoBehaviour
         XVert2 = VertIsies[70].x;
         zVert2 = VertIsies[54].z;
 
-        int zPos = Random.Range(0, 40000);
-        int xPos = Random.Range(0, 40000);
+        int zPos = Random.Range(1, 20000);
+        int xPos = Random.Range(1, 20000);
         int zPos1 = Random.Range(1, 100);
         int xPos1 = Random.Range(1, 100);
         //for (int i = 0; i < mf.mesh.vertices.Length; i++)

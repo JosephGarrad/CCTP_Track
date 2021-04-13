@@ -26,7 +26,7 @@ public class pathfinding : MonoBehaviour
     public GameObject StartPoint;
     public Vector3 midPoint;
     List<Vector3> Points = new List<Vector3>();
-
+    List<NodeScript> allnodes = new List<NodeScript>();
     public bool Mid_Hit;
     private void Awake()
     {
@@ -35,11 +35,12 @@ public class pathfinding : MonoBehaviour
     }
     private void Start()
     {
-        midPoint = MS.MidPoint;
+       
         Points.Add(MS.startPoint);
         Points.Add(MS.MidPoint);
         Points.Add(MS.Otherpoint);
         Points.Add(MS.Endpoint);
+        Points.Add(MS.startPoint);
 
     }
     void Update()
@@ -63,6 +64,7 @@ public class pathfinding : MonoBehaviour
            // Currentpoint = Points[i];
            // NextPoint = Points[i + 1];
             findpath(Currentpoint, NextPoint);
+   
         //}
     }
     void findpath(Vector3 startPos, Vector3 targetpos)
@@ -70,8 +72,8 @@ public class pathfinding : MonoBehaviour
         NodeScript startnode = Grid.NodefromWorldPoint(startPos);
         NodeScript targetnode = Grid.NodefromWorldPoint(targetpos);
         NodeScript MidPointnode = Grid.NodefromWorldPoint(midPoint);
-     List<NodeScript> openSet = new List<NodeScript>();
-     HashSet<NodeScript> closeSet = new HashSet<NodeScript>();
+        List<NodeScript> openSet = new List<NodeScript>();
+        HashSet<NodeScript> closeSet = new HashSet<NodeScript>();
     openSet.Add(startnode);
 
         while(openSet.Count > 0 )
@@ -79,10 +81,10 @@ public class pathfinding : MonoBehaviour
             NodeScript currentNode = openSet[0];
             for(int i = 1; i < openSet.Count; i++)
             {
-                if (Retries == 0 && openSet[i].fcost < currentNode.fcost || openSet[i].fcost == currentNode.fcost && openSet[i].hCost < currentNode.hCost && !openSet.Contains(currentNode)) // checking to see if the next node has a lower cost, if it does make it the current node
+                if (Retries == 0 && openSet[i].fcost < currentNode.fcost || openSet[i].fcost == currentNode.fcost && openSet[i].hCost < currentNode.hCost && !allnodes.Contains(currentNode)) // checking to see if the next node has a lower cost, if it does make it the current node
                 {
                     currentNode = openSet[i];
-                  
+                    allnodes.Add(currentNode);
                 }
                
             }
@@ -121,7 +123,7 @@ public class pathfinding : MonoBehaviour
             {
                 foreach (NodeScript Neighbour in Grid.GetNeighbours(currentNode))
                 {
-                    if ( !Neighbour.walkable || closeSet.Contains(Neighbour))
+                    if ( !Neighbour.walkable || closeSet.Contains(Neighbour)|| allnodes.Contains(Neighbour))
                     {
                         continue;
                     }
