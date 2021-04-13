@@ -63,6 +63,7 @@ public class pathfinding : MonoBehaviour
         //{
            // Currentpoint = Points[i];
            // NextPoint = Points[i + 1];
+           
             findpath(Currentpoint, NextPoint);
    
         //}
@@ -81,7 +82,7 @@ public class pathfinding : MonoBehaviour
             NodeScript currentNode = openSet[0];
             for(int i = 1; i < openSet.Count; i++)
             {
-                if (Retries == 0 && openSet[i].fcost < currentNode.fcost || openSet[i].fcost == currentNode.fcost && openSet[i].hCost < currentNode.hCost && !allnodes.Contains(currentNode)) // checking to see if the next node has a lower cost, if it does make it the current node
+                if (Retries == 0 && openSet[i].fcost < currentNode.fcost || openSet[i].fcost == currentNode.fcost && openSet[i].hCost < currentNode.hCost )//&& !allnodes.Contains(currentNode)) // checking to see if the next node has a lower cost, if it does make it the current node
                 {
                     currentNode = openSet[i];
                     allnodes.Add(currentNode);
