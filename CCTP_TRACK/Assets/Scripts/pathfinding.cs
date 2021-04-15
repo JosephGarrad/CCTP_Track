@@ -85,9 +85,9 @@ public class pathfinding : MonoBehaviour
                 if (Retries == 0 && openSet[i].fcost < currentNode.fcost || openSet[i].fcost == currentNode.fcost && openSet[i].hCost < currentNode.hCost )//&& !allnodes.Contains(currentNode)) // checking to see if the next node has a lower cost, if it does make it the current node
                 {
                     currentNode = openSet[i];
-                    allnodes.Add(currentNode);
+                   
                 }
-               
+                allnodes.Add(currentNode);
             }
             openSet.Remove(currentNode); // when you move to the next node taske the cuuent node out of the open list so we cant go back to it 
             closeSet.Add(currentNode); // add to the closed list so we know its been tested;
@@ -124,7 +124,7 @@ public class pathfinding : MonoBehaviour
             {
                 foreach (NodeScript Neighbour in Grid.GetNeighbours(currentNode))
                 {
-                    if ( !Neighbour.walkable || closeSet.Contains(Neighbour)|| allnodes.Contains(Neighbour))
+                    if ( !Neighbour.walkable || closeSet.Contains(Neighbour) || allnodes.Contains(Neighbour))
                     {
                         continue;
                     }

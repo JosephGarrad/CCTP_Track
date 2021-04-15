@@ -95,8 +95,8 @@ public class MeshGenerator : MonoBehaviour
         //{
         startPoint = new Vector3(VertIsies[30].x, 0, VertIsies[30].z); // new Vector3(10, 0, 3/*zVert + 2*/) ; // adding 20 spaces onto the z vector
         Endpoint = new Vector3(VertIsies[150].x, 0, 0);//+ Vector3.forward * 71;
-        MidPoint = new Vector3(VertIsies[xPos].x, 0, VertIsies[xPos].y);
-        Otherpoint = new Vector3(VertIsies[zPos].x, 0, VertIsies[zPos].y); // make the position a verticie
+        MidPoint = new Vector3(VertIsies[100].x, 0, VertIsies[100].y);
+        Otherpoint = new Vector3(VertIsies[60].x, 0, VertIsies[60].y); // make the position a verticie
         Debug.Log(xPos);
         Debug.Log(zPos);
         //j++;
