@@ -17,7 +17,7 @@ public class pathfinding : MonoBehaviour
     List<NodeScript > oldtrack = new List<NodeScript>();
     public int HillMovementCostToNeighb;
     private int FlatMovementCostToNeighb;
-    List<NodeScript> path = new List<NodeScript>();
+   public List<NodeScript> path = new List<NodeScript>();
     public bool Hilly_track;
     public bool Quickest_track;
     public bool flat_track;
@@ -42,6 +42,7 @@ public class pathfinding : MonoBehaviour
         Points.Add(MS.Endpoint);
         Points.Add(MS.startPoint);
 
+
     }
     void Update()
     {
@@ -49,15 +50,18 @@ public class pathfinding : MonoBehaviour
         //  findpath(MS.MidPoint, MS.Otherpoint);//
         // findpath(MS.Otherpoint, MS.Endpoint);// Make a function that loops through and store the points rather than calling the function a set amount of times
         // findpath(MS.Endpoint, MS.startPoint);//
-        for (int i = 0; i < 4; i++)
-        {
-            ToNextPoint(Points[i],Points[i+1]);
-        }
+      
         retry_track();
        // Debug.Log("seker" + seeker.position);
     }
-
-   void ToNextPoint(Vector3 Currentpoint, Vector3 NextPoint)
+    private void FixedUpdate()
+    {
+        for (int i = 0; i < 4; i++)
+        {
+            ToNextPoint(Points[i], Points[i + 1]);
+        }
+    }
+    void ToNextPoint(Vector3 Currentpoint, Vector3 NextPoint)
     {
         //for(int i = 0; i< 4; i++)
         //{
@@ -124,7 +128,7 @@ public class pathfinding : MonoBehaviour
             {
                 foreach (NodeScript Neighbour in Grid.GetNeighbours(currentNode))
                 {
-                    if ( !Neighbour.walkable || closeSet.Contains(Neighbour)) //|| allnodes.Contains(Neighbour))
+                    if ( !Neighbour.walkable || closeSet.Contains(Neighbour)|| allnodes.Contains(Neighbour))
                     {
                         continue;
                     }

@@ -15,6 +15,7 @@ public class TrackBuilder :  MonoBehaviour
     //public GameObject NodeScript;
     public GameObject Cube;
     bool Built = false;
+   
     public GameObject rTrack;
     gride Grid;
     int endpeice;
@@ -51,12 +52,16 @@ public class TrackBuilder :  MonoBehaviour
    void build()
    {
         
-            foreach (NodeScript n in GD.grid)
+            foreach (NodeScript n in GD.path)
             {
                 if (GD.path.Contains(n) )
                 {
                 rTrack = Instantiate(Cube, n.worldPos, Quaternion.identity);
                 TrackPeices.Add(rTrack);
+
+
+
+
                  //Direction = new Vector3(rTrack.transform.position.x -TrackPeices[Tracknum + 1].gameObject.transform.position.x, rTrack.transform.position.y - TrackPeices[Tracknum + 1].gameObject.transform.position.y, rTrack.transform.position.z - TrackPeices[Tracknum + 1].gameObject.transform.position.z).normalized;
                
                 // chnage the direction of each sqaure in its own script 
