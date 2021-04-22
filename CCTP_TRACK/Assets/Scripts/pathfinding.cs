@@ -124,7 +124,7 @@ public class pathfinding : MonoBehaviour
             {
                 foreach (NodeScript Neighbour in Grid.GetNeighbours(currentNode))
                 {
-                    if ( !Neighbour.walkable || closeSet.Contains(Neighbour) || allnodes.Contains(Neighbour))
+                    if ( !Neighbour.walkable || closeSet.Contains(Neighbour)) //|| allnodes.Contains(Neighbour))
                     {
                         continue;
                     }

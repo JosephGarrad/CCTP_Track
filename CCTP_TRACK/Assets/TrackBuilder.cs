@@ -15,13 +15,14 @@ public class TrackBuilder :  MonoBehaviour
     //public GameObject NodeScript;
     public GameObject Cube;
     bool Built = false;
-    private GameObject rTrack;
+    public GameObject rTrack;
     gride Grid;
     int endpeice;
     private int Tracknum;
     private Vector3 Direction;
     private Quaternion LookRotation;
     public List<GameObject> TrackPeices = new List<GameObject>();
+    float Dis;
     //int offset = 197;
     // Start is called before the first frame update
     void Start()
@@ -31,7 +32,7 @@ public class TrackBuilder :  MonoBehaviour
         PS = Pathfinding.gameObject.GetComponent<pathfinding>();
        // ND = NodeScript.gameObject.GetComponent<NodeScript>();
         Grid = GetComponent<gride>();
-
+       
     }
 
     // Update is called once per frame
@@ -42,7 +43,10 @@ public class TrackBuilder :  MonoBehaviour
             build();
             Built = true;
         }
-       
+
+        rotate();
+
+
     }
    void build()
    {
@@ -53,11 +57,31 @@ public class TrackBuilder :  MonoBehaviour
                 {
                 rTrack = Instantiate(Cube, n.worldPos, Quaternion.identity);
                 TrackPeices.Add(rTrack);
-                Direction =  (rTrack.transform.position -TrackPeices[Tracknum + 1].gameObject.transform.position ).normalized;
-                LookRotation = Quaternion.LookRotation(Direction);
+                 //Direction = new Vector3(rTrack.transform.position.x -TrackPeices[Tracknum + 1].gameObject.transform.position.x, rTrack.transform.position.y - TrackPeices[Tracknum + 1].gameObject.transform.position.y, rTrack.transform.position.z - TrackPeices[Tracknum + 1].gameObject.transform.position.z).normalized;
+               
+                // chnage the direction of each sqaure in its own script 
+                //get the list and it it tht way 
+                
+                
+                
+                
+                // LookRotation = Quaternion.LookRotation(Direction);
+                //for (int i = 1; i < TrackPeices.Count; i++)
+                //{
+                //   // Vector3 CPos = new Vector3(rTrack.transform.position.x + TrackPeices[i - 1].transform.position.x, rTrack.transform.position.z + TrackPeices[i - 1].transform.position.z) / 2;
+                //    float scaleZ = Mathf.Abs(TrackPeices[i].transform.position.z + TrackPeices[i + 1].transform.position.z);
+                //    rTrack.transform.localScale = new Vector3(1,1,scaleZ);
+                //}
+
+                //for (int i = 1; i < TrackPeices.Count; i++)
+                //{
+                //    Dis = Vector3.Distance(rTrack.transform.position, TrackPeices[i - 1].transform.position);
+                //}
+                //Vector3 newScale = Dis;
+                //rTrack.transform.localScale = new Vector3(rTrack.transform.localScale.x, rTrack.transform.localScale.y, newScale.z);
 
 
-                rTrack.transform.localRotation = Quaternion.LookRotation(Direction);
+               // rTrack.transform.localRotation = Quaternion.LookRotation(Direction);
 
                 // rTrack.transform.LookAt(TrackPeices[Tracknum+1].gameObject.transform.position);
 
@@ -83,9 +107,19 @@ public class TrackBuilder :  MonoBehaviour
            
             }
         }
+     
 
-        
+
         endpeice =TrackPeices.Count;
     
+    }
+    void rotate()
+    {
+        for (int i = 0; i < TrackPeices.Count; i++)
+        {
+            Direction = (TrackPeices[i].gameObject.transform.position - TrackPeices[i + 1].gameObject.transform.position);
+            TrackPeices[i].gameObject.transform.localRotation = Quaternion.LookRotation(Direction);
+            //rTrack.transform.localRotation = Quaternion.LookRotation(Direction);
+        }
     }
 }

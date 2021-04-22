@@ -509,55 +509,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 550707295}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!1 &633804217
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 633804218}
-  - component: {fileID: 633804219}
-  m_Layer: 0
-  m_Name: TravkBuilder
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &633804218
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 633804217}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 7
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &633804219
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 633804217}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 08cb98b24f9f8334595fa505660777bc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Track: {fileID: 0}
-  TerrainGenerator: {fileID: 289922950}
-  GridScript: {fileID: 2007823583}
-  Pathfinding: {fileID: 0}
-  Cube: {fileID: 7442739914693784108, guid: 4c5c6c72ff6cd4847a92320fd9885cb2, type: 3}
-  TrackPeices: []
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -1322,3 +1273,68 @@ MonoBehaviour:
   StartPoint: {fileID: 1667290550}
   midPoint: {x: 0, y: 0, z: 0}
   Mid_Hit: 0
+--- !u!1001 &6985845728551635737
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 6985845728111697568, guid: 122d1c3addbc688469ad0d43fe4d8d30, type: 3}
+      propertyPath: m_Name
+      value: TravkBuilder
+      objectReference: {fileID: 0}
+    - target: {fileID: 6985845728111697570, guid: 122d1c3addbc688469ad0d43fe4d8d30, type: 3}
+      propertyPath: GridScript
+      value: 
+      objectReference: {fileID: 2007823583}
+    - target: {fileID: 6985845728111697570, guid: 122d1c3addbc688469ad0d43fe4d8d30, type: 3}
+      propertyPath: TerrainGenerator
+      value: 
+      objectReference: {fileID: 289922950}
+    - target: {fileID: 6985845728111697571, guid: 122d1c3addbc688469ad0d43fe4d8d30, type: 3}
+      propertyPath: m_RootOrder
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 6985845728111697571, guid: 122d1c3addbc688469ad0d43fe4d8d30, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6985845728111697571, guid: 122d1c3addbc688469ad0d43fe4d8d30, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6985845728111697571, guid: 122d1c3addbc688469ad0d43fe4d8d30, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6985845728111697571, guid: 122d1c3addbc688469ad0d43fe4d8d30, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6985845728111697571, guid: 122d1c3addbc688469ad0d43fe4d8d30, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6985845728111697571, guid: 122d1c3addbc688469ad0d43fe4d8d30, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6985845728111697571, guid: 122d1c3addbc688469ad0d43fe4d8d30, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6985845728111697571, guid: 122d1c3addbc688469ad0d43fe4d8d30, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6985845728111697571, guid: 122d1c3addbc688469ad0d43fe4d8d30, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6985845728111697571, guid: 122d1c3addbc688469ad0d43fe4d8d30, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 122d1c3addbc688469ad0d43fe4d8d30, type: 3}

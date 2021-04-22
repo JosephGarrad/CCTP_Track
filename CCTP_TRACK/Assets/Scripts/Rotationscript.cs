@@ -5,29 +5,33 @@ using UnityEngine;
 public class Rotationscript : MonoBehaviour
 {
 
-  //  public GameObject Pathfinding;
-    pathfinding PS;
-    gride GS;
+    //  public GameObject Pathfinding;
+    private Vector3 Direction;
+    TrackBuilder TB;
+    public GameObject Tb;
     // Start is called before the first frame update
     void Start()
     {
-       // PS = GameObject.FindGameObjectWithTag("A*").gameObject.GetComponent<pathfinding>();
-    //    GS = GameObject.FindGameObjectWithTag("GRIDE").gameObject.GetComponent<gride>();
-    //    for (int i = 0; i <= GS.path.Count; i++)
-    //    {
-    //        Vector2 direction = (GS.path[i+1].worldPos - this.transform.position).normalized;
-    //        float distance = Vector2.Distance(GS.path[i].worldPos, GS.path[i + 1].worldPos);
-    //        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        TB = Tb.gameObject.GetComponent<TrackBuilder>();
 
-    //        //rectTransform.anchoredPosition = dotPositionA + direction * distance * 0.5f; // Placed in middle between A + B
-    //        transform.localScale = new Vector3(distance, transform.localScale.y, transform.localScale.z);
-    //    }
+      //  foreach (var Block in TB.TrackPeices)
+      //  {
+           // GameObject Block1 = Block +1;
+       //     Direction = (Block.transform.position - Block.transform.position);
+       // }
+     
+
+       
 
     }
 
     // Update is called once per frame
     void Update()
     {
-
+        for (int i = 0; i < TB.TrackPeices.Count; i++)
+        {
+            Direction = (TB.TrackPeices[i].gameObject.transform.position - TB.TrackPeices[i + 1].gameObject.transform.position);
+            TB.TrackPeices[i].gameObject.transform.localRotation = Quaternion.LookRotation(Direction);
+        }
     }
 }
