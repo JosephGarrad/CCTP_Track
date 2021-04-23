@@ -28,6 +28,7 @@ public class pathfinding : MonoBehaviour
     List<Vector3> Points = new List<Vector3>();
     List<NodeScript> allnodes = new List<NodeScript>();
     public bool Mid_Hit;
+    private int TracksBuilt = 0;
     private void Awake()
     {
         Grid = GetComponent<gride>(); //getting the gride script
@@ -52,15 +53,18 @@ public class pathfinding : MonoBehaviour
         // findpath(MS.Endpoint, MS.startPoint);//
       
         retry_track();
-       // Debug.Log("seker" + seeker.position);
-    }
-    private void FixedUpdate()
-    {
+
         for (int i = 0; i < 4; i++)
         {
-            ToNextPoint(Points[i], Points[i + 1]);
+            if (TracksBuilt != 4)
+            {
+                ToNextPoint(Points[i], Points[i + 1]);
+                TracksBuilt++;
+            }
         }
+        // Debug.Log("seker" + seeker.position);
     }
+ 
     void ToNextPoint(Vector3 Currentpoint, Vector3 NextPoint)
     {
         //for(int i = 0; i< 4; i++)
