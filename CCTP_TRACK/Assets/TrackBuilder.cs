@@ -12,7 +12,7 @@ public class TrackBuilder :  MonoBehaviour
     public GameObject Pathfinding;
     pathfinding PS;
     //NodeScript ND;
-    //public GameObject NodeScript;
+   
     public GameObject Cube;
     bool Built = false;
    
@@ -42,10 +42,12 @@ public class TrackBuilder :  MonoBehaviour
        if(!Built)
         {
             build();
+            stretch();
             Built = true;
         }
-
+      
         rotate();
+      
 
 
     }
@@ -125,6 +127,26 @@ public class TrackBuilder :  MonoBehaviour
             Direction = (TrackPeices[i].gameObject.transform.position - TrackPeices[i + 1].gameObject.transform.position);
             TrackPeices[i].gameObject.transform.localRotation = Quaternion.LookRotation(Direction);
             //rTrack.transform.localRotation = Quaternion.LookRotation(Direction);
+        }
+    }
+    void stretch()
+    {
+        for (int i = 0; i < TrackPeices.Count ; i++)
+        {
+            if (TrackPeices[i] != TrackPeices[TrackPeices.Count -1] && TrackPeices[i] != TrackPeices[0])
+            {
+                Dis = Vector3.Distance(TrackPeices[i].gameObject.transform.position, TrackPeices[i+1].gameObject.transform.position);
+                Debug.Log("Dis" + Dis);
+                TrackPeices[i].gameObject.transform.localScale = new Vector3(TrackPeices[i].gameObject.transform.localScale.x, TrackPeices[i].gameObject.transform.localScale.y, Dis);
+            }
+            //// Vector3 Distance = TrackPeices[i - 1].gameObject.transform.position - TrackPeices[i + 1].gameObject.transform.position;
+
+
+            //Vector3 objectScale = TrackPeices[i].transform.localScale;
+            //float distance = Vector3.Distance(TrackPeices[i - 1].transform.position, TrackPeices[i +1].transform.position);
+            //Vector3 newScale = new Vector3(objectScale.x, objectScale.y, distance);
+            //TrackPeices[i].transform.localScale = newScale;
+
         }
     }
 }
