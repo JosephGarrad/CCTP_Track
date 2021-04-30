@@ -12,10 +12,10 @@ public class TrackBuilder :  MonoBehaviour
     public GameObject Pathfinding;
     pathfinding PS;
     //NodeScript ND;
-   
+    public Terrain raceterrain;
     public GameObject Cube;
     bool Built = false;
-   
+    float m_AngleX;
     public GameObject rTrack;
     gride Grid;
     int endpeice;
@@ -44,13 +44,13 @@ public class TrackBuilder :  MonoBehaviour
        if(!Built)
         {
             build();
-            stretch();
+           stretch();
             Built = true;
         }
        
         rotate();
        
-
+  
 
     }
    void build()
@@ -60,7 +60,7 @@ public class TrackBuilder :  MonoBehaviour
             {
                 if (GD.path.Contains(n) )
                 {
-                rTrack = Instantiate(Cube, n.worldPos, Quaternion.identity);
+                rTrack = Instantiate(Cube,new Vector3(n.worldPos.x,n.worldPos.y + 1,n.worldPos.z), Quaternion.identity);
                 TrackPeices.Add(rTrack);
 
 
@@ -127,7 +127,9 @@ public class TrackBuilder :  MonoBehaviour
         for (int i = 0; i < TrackPeices.Count; i++)
         {
             Direction = (TrackPeices[i].gameObject.transform.position - TrackPeices[i + 1].gameObject.transform.position);
+            //m_AngleX = Vector2.Angle(TrackPeices[i-1].gameObject.transform.position, TrackPeices[i+1].gameObject.transform.position);
             TrackPeices[i].gameObject.transform.localRotation = Quaternion.LookRotation(Direction);
+         
             //rTrack.transform.localRotation = Quaternion.LookRotation(Direction);
         }
     }
@@ -139,7 +141,7 @@ public class TrackBuilder :  MonoBehaviour
         {
             if (TrackPeices[i] != TrackPeices[TrackPeices.Count - 1] && TrackPeices[i] != TrackPeices[0])
             {
-                Dis = Vector3.Distance(TrackPeices[i].gameObject.transform.position, TrackPeices[i - 1].gameObject.transform.position);
+                Dis = Vector3.Distance(TrackPeices[i].gameObject.transform.position, TrackPeices[i + 1].gameObject.transform.position);
         
                 //Debug.Log("Dis" + Dis);
                 //TrackPeices[i].gameObject.transform.localScale = new Vector3(TrackPeices[i].gameObject.transform.localScale.x, TrackPeices[i].gameObject.transform.localScale.y, Dis);
@@ -154,7 +156,7 @@ public class TrackBuilder :  MonoBehaviour
             
                
              // Debug.Log("Dis" + Dis);
-               Peice.gameObject.transform.localScale = new Vector3(Peice.gameObject.transform.localScale.x, Peice.gameObject.transform.localScale.y, Dis);
+               Peice.gameObject.transform.localScale = new Vector3(Peice.gameObject.transform.localScale.x, Peice.gameObject.transform.localScale.y, Dis/15);
       
             }
 

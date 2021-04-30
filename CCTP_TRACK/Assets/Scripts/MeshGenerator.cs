@@ -24,6 +24,8 @@ public class MeshGenerator : MonoBehaviour
     gride GS;
     public GameObject Gride;
     public Color[] colorMap;
+
+
     public float Freq_1;
     public float Freq_2;
     public float Freq_3;
@@ -171,6 +173,8 @@ public class MeshGenerator : MonoBehaviour
                 i++;
             }
         }
+     
+
     }
     void UpdateTerrain()
     {
