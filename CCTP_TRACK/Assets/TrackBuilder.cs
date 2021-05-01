@@ -60,9 +60,9 @@ public class TrackBuilder :  MonoBehaviour
             {
                 if (GD.path.Contains(n) )
                 {
-                rTrack = Instantiate(Cube,new Vector3(n.worldPos.x,n.worldPos.y + 1,n.worldPos.z), Quaternion.identity);
+                rTrack = Instantiate(Cube,new Vector3(n.worldPos.x,n.worldPos.y,n.worldPos.z), Quaternion.identity);
                 TrackPeices.Add(rTrack);
-
+                rTrack.name = ("Track");
 
 
 
@@ -156,7 +156,7 @@ public class TrackBuilder :  MonoBehaviour
             
                
              // Debug.Log("Dis" + Dis);
-               Peice.gameObject.transform.localScale = new Vector3(Peice.gameObject.transform.localScale.x, Peice.gameObject.transform.localScale.y, Dis/15);
+               Peice.gameObject.transform.localScale = new Vector3(Peice.gameObject.transform.localScale.x, Peice.gameObject.transform.localScale.y, Dis);
       
             }
 

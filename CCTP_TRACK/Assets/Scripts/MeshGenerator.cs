@@ -168,6 +168,7 @@ public class MeshGenerator : MonoBehaviour
         {
             for (int x = 0; x < XSize; x++)
             {
+                
                 float height = Mathf.InverseLerp(minHeight,maxHeight, VertIsies[i].y);// normalising the hieght of terrain to work with gradient;
                 colorMap[i] = Grad.Evaluate(height); 
                 i++;

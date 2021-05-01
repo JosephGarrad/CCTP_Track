@@ -166,6 +166,7 @@ GameObject:
   - component: {fileID: 289922952}
   - component: {fileID: 289922951}
   - component: {fileID: 289922955}
+  - component: {fileID: 289922956}
   m_Layer: 0
   m_Name: TerrainGenerator
   m_TagString: MeshG
@@ -319,6 +320,20 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 0}
+--- !u!114 &289922956
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 289922950}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5b8a39f6a29e0847b80e66f1a0ffc4f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Radius: 1
+  TBS: {fileID: 1061217127}
 --- !u!1 &511924237
 GameObject:
   m_ObjectHideFlags: 0
@@ -908,6 +923,11 @@ MonoBehaviour:
   m_RequiresDepthTexture: 0
   m_RequiresColorTexture: 0
   m_Version: 2
+--- !u!1 &1061217127 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6985845728111697568, guid: 122d1c3addbc688469ad0d43fe4d8d30, type: 3}
+  m_PrefabInstance: {fileID: 6985845728551635737}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1526483727
 GameObject:
   m_ObjectHideFlags: 0
@@ -1344,7 +1364,7 @@ PrefabInstance:
     - target: {fileID: 6985845728111697570, guid: 122d1c3addbc688469ad0d43fe4d8d30, type: 3}
       propertyPath: Cube
       value: 
-      objectReference: {fileID: 2025872700610025451, guid: 832283275e86bdf41a5883d65c617893, type: 3}
+      objectReference: {fileID: 7442739914693784108, guid: 4c5c6c72ff6cd4847a92320fd9885cb2, type: 3}
     - target: {fileID: 6985845728111697570, guid: 122d1c3addbc688469ad0d43fe4d8d30, type: 3}
       propertyPath: GridScript
       value: 
