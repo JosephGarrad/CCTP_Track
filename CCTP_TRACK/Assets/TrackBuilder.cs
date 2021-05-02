@@ -14,10 +14,13 @@ public class TrackBuilder :  MonoBehaviour
     //NodeScript ND;
     public Terrain raceterrain;
     public GameObject Cube;
-    bool Built = false;
+   public bool Built = false;
     float m_AngleX;
     public GameObject rTrack;
     gride Grid;
+
+    ChangeTextureToRoad CTTR;
+    public GameObject Trackchnager;
     int endpeice;
     private int Tracknum;
     private Vector3 Direction;
@@ -33,6 +36,7 @@ public class TrackBuilder :  MonoBehaviour
         MG = TerrainGenerator.gameObject.GetComponent<MeshGenerator>();
         GD = GridScript.gameObject.GetComponent<gride>();
         PS = Pathfinding.gameObject.GetComponent<pathfinding>();
+        CTTR = Trackchnager.gameObject.GetComponent<ChangeTextureToRoad>();
        // ND = NodeScript.gameObject.GetComponent<NodeScript>();
         Grid = GetComponent<gride>();
        
@@ -49,8 +53,8 @@ public class TrackBuilder :  MonoBehaviour
         }
        
         rotate();
+
        
-  
 
     }
    void build()
@@ -147,18 +151,17 @@ public class TrackBuilder :  MonoBehaviour
                 //TrackPeices[i].gameObject.transform.localScale = new Vector3(TrackPeices[i].gameObject.transform.localScale.x, TrackPeices[i].gameObject.transform.localScale.y, Dis);
             }
         }
- ;
  
 
         foreach (var Peice in TrackPeices)
-            {
+        {
 
             
                
              // Debug.Log("Dis" + Dis);
                Peice.gameObject.transform.localScale = new Vector3(Peice.gameObject.transform.localScale.x, Peice.gameObject.transform.localScale.y, Dis);
       
-            }
+        }
 
             //Vector3 objectScale = TrackPeices[i].transform.localScale;
             //float distance = Vector3.Distance(TrackPeices[i - 1].transform.position, TrackPeices[i +1].transform.position);
