@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ChangeTextureToRoad : MonoBehaviour
 {
-  //  Material Mat;
+  Material Mat;
     GameObject[] Player;
     public int Radius = 10;
     TrackBuilder TB;
@@ -17,7 +17,7 @@ public class ChangeTextureToRoad : MonoBehaviour
         GD = GridScript.gameObject.GetComponent<gride>();
         TB = TBS.gameObject.GetComponent<TrackBuilder>();
         // Get the material
-       // Mat = GetComponent<Renderer>().material;
+       Mat = GetComponent<Renderer>().material;
         // Get the player object
        
     }
@@ -47,8 +47,8 @@ public class ChangeTextureToRoad : MonoBehaviour
         {
             if (GD.path.Contains(n))
             {
-                Material Mat = new Material(GetComponent<Renderer>().material);
-                GetComponent<Renderer>().material = Mat;
+               // Material Mat = new Material(GetComponent<Renderer>().material);
+                //GetComponent<Renderer>().material = Mat;
 
                 Mat.SetVector("_NodePos", n.worldPos);
                 Mat.SetFloat("_Dist", Radius);

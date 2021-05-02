@@ -2,8 +2,8 @@ Shader "Unlit/YES"
 {
     Properties
     {
-        _NodePos("Node position", vector) = (0.0, 0.0, 0.0, 0.0)
-        _Dist("Distance", float) = 5.0
+        [PerRendererData]_NodePos("Node position", vector) = (0.0, 0.0, 0.0, 0.0)
+        [PerRendererData]_Dist("Distance", float) = 5.0
         _MainTex("Texture", 2D) = "white" {}
         _SecondayTex("Secondary texture", 2D) = "white"{}
         _NumOfPeices("Pieces",float) = 5.0
