@@ -62,7 +62,7 @@ public class gride : MonoBehaviour
                 //put this into a function and cal it when the veerticies are made?
                 //kill myself?
                 //god this pain is endl
-                 //Vector3 worldpoint = BottomLeft + Vector3.right * (x * nodeDiam + VerticiesRadius) + Vector3.forward * (z * nodeDiam + VerticiesRadius) ;
+                //Vector3 worldpoint = BottomLeft + Vector3.right * (x * nodeDiam + VerticiesRadius) + Vector3.forward * (z * nodeDiam + VerticiesRadius) ;
                 Vector3 worldpoint = new Vector3(MG.VertIsies[i].x, MG.VertIsies[i].y, MG.VertIsies[i].z);
                 if (MG.VertIsies[i].y >= maxHeight || MG.VertIsies[i].y <= minDepth)     //Debug.Log("Nodes" + worldpoint);
                {
