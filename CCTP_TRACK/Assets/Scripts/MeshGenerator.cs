@@ -6,7 +6,7 @@ public class MeshGenerator : MonoBehaviour
 {
    public Mesh LandMesh;
    public Vector3[] VertIsies;
-  // public List<Vector3[]> Verticies2 = new List<Vector3[]>();
+  
  
      public int[] triangles;
    
@@ -89,34 +89,18 @@ public class MeshGenerator : MonoBehaviour
         int xPos = Random.Range(1, 99);
         int zPos1 = Random.Range(1, 100);
         int xPos1 = Random.Range(1, 100);
-        //for (int i = 0; i < mf.mesh.vertices.Length; i++)
-        //{
-        // for (int j = 0, x = 0; x <= XSize; x++)
-        // {
-        //for (int z = 0; z <= ZSize; z++,j++)
-        //{
-        startPoint = new Vector3(VertIsies[30].x, 0, VertIsies[30].z); // new Vector3(10, 0, 3/*zVert + 2*/) ; // adding 20 spaces onto the z vector
-        Endpoint = new Vector3(VertIsies[150].x, 0, 0);//+ Vector3.forward * 71;
+      
+        startPoint = new Vector3(VertIsies[30].x, 0, VertIsies[30].z); // adding 20 spaces onto the z vector
+        Endpoint = new Vector3(VertIsies[150].x, 0, 0);
         MidPoint = new Vector3(VertIsies[100].x, 0, VertIsies[100].y);
         Otherpoint = new Vector3(VertIsies[60].x, 0, VertIsies[60].y); // make the position a verticie
-        Debug.Log(xPos);
-        Debug.Log(zPos);
-        //j++;
-        //}
-        //}
-        // if (startPoint == VertIsies[i])
-        // {
-        //     Instantiate(Cube, localtoworld.MultiplyPoint3x4(startPoint) , Quaternion.identity);
-        //}
 
-
-        //}
     }
        
     void CreateTerrain()
     {
         VertIsies = new Vector3[(XSize + 1) * (ZSize + 1)];
-        // aStarManager.gameObject.GetComponent<gride>().createGrid();
+
         for (int j = 0, z = 0; z <= ZSize; z++)
         {
             for (int x = 0; x <= XSize; x++)
@@ -124,7 +108,7 @@ public class MeshGenerator : MonoBehaviour
                 
                 float Elevation = CalculateMultiNoise(x, z);
                 VertIsies[j] = new Vector3(x, Elevation, z);
-                //Debug.Log("vert" + VertIsies[j]);
+    
                 if(Elevation > maxHeight)
                 {
                     maxHeight = Elevation;
@@ -133,7 +117,7 @@ public class MeshGenerator : MonoBehaviour
                 {
                     minHeight = Elevation;
                 }
-                //GS.createGrid(z, x, j);
+
                 j++;
 
             }
@@ -183,7 +167,6 @@ public class MeshGenerator : MonoBehaviour
 
 
 
-       // texture.Apply();
 
         LandMesh.Clear(); // clears any previous mesh loaded in to this object in the scene
 
@@ -192,12 +175,9 @@ public class MeshGenerator : MonoBehaviour
         
         LandMesh.RecalculateNormals();
         LandMesh.colors = colorMap;// recalculating the lighting and rendering
-       // RD.sharedMaterial.SetTexture("texture",texture);
+    
     }
-    //public Texture2D TextureMap()
-    //{
-       
-    //}
+
     float CalculateMultiNoise(float x, float z)
     {
       
@@ -212,12 +192,5 @@ public class MeshGenerator : MonoBehaviour
         
         return y;
     }
-    private void OnDrawGizmos()
-    {
-        for(int i = 0; i< VertIsies.Length; i++)
-        {
-          //Gizmos.DrawSphere(VertIsies[i],0.5f);
-        }
-        
-    }
+   
 }

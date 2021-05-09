@@ -3690,6 +3690,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 16
   Worldsize: {x: 200, y: 200, z: 0}
+  gridmade: 0
   Mheight: {fileID: 955884354}
   MDepth: {fileID: 679687298}
   TerrainGenerator: {fileID: 289922950}
@@ -4009,6 +4010,10 @@ PrefabInstance:
       objectReference: {fileID: 7442739914693784108, guid: 4c5c6c72ff6cd4847a92320fd9885cb2, type: 3}
     - target: {fileID: 6985845728111697570, guid: 122d1c3addbc688469ad0d43fe4d8d30, type: 3}
       propertyPath: GridScript
+      value: 
+      objectReference: {fileID: 2007823583}
+    - target: {fileID: 6985845728111697570, guid: 122d1c3addbc688469ad0d43fe4d8d30, type: 3}
+      propertyPath: Pathfinding
       value: 
       objectReference: {fileID: 2007823583}
     - target: {fileID: 6985845728111697570, guid: 122d1c3addbc688469ad0d43fe4d8d30, type: 3}

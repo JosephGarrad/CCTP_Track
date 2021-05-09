@@ -11,7 +11,7 @@ public class gride : MonoBehaviour
     public NodeScript[,] grid;
     MeshGenerator MG;
     pathfinding PF;
-
+    public bool gridmade;
     public InputField Mheight;
     public InputField MDepth;
     public GameObject TerrainGenerator;
@@ -35,22 +35,19 @@ public class gride : MonoBehaviour
 
 
        nodeDiam = VerticiesRadius*1;
-       //GridXsize = Mathf.RoundToInt(Worldsize.x / nodeDiam);
-        //GridZsize = Mathf.RoundToInt(Worldsize.y / nodeDiam);
+     
         GridXsize = MG.XSize;
         GridZsize = MG.ZSize;
+       
 
     }
     private void Update()
     {
-      int MHieghtINT = int.Parse(Mheight.text);
-      int MDepthINT = int.Parse(MDepth.text);
 
+       
 
-        maxHeight = MHieghtINT;
-        minDepth = MDepthINT;
         createGrid();
-        Debug.Log(GridXsize);
+        
     }
     public void createGrid()
 
@@ -68,12 +65,9 @@ public class gride : MonoBehaviour
 
             for (int  z = 0; z < GridZsize; z++)
             {
-                //put this into a function and cal it when the veerticies are made?
-                //kill myself?
-                //god this pain is endl
-                //Vector3 worldpoint = BottomLeft + Vector3.right * (x * nodeDiam + VerticiesRadius) + Vector3.forward * (z * nodeDiam + VerticiesRadius) ;
+               
                 Vector3 worldpoint = new Vector3(MG.VertIsies[i].x, MG.VertIsies[i].y, MG.VertIsies[i].z);
-                if (MG.VertIsies[i].y >= maxHeight || MG.VertIsies[i].y <= minDepth)     //Debug.Log("Nodes" + worldpoint);
+                if (MG.VertIsies[i].y >= maxHeight || MG.VertIsies[i].y <= minDepth)  
                {
                 Instantiate(Block, MG.VertIsies[i], Quaternion.identity);
                 }
@@ -85,6 +79,7 @@ public class gride : MonoBehaviour
                
             }
         }
+        gridmade = true;
     }
 
 
@@ -114,20 +109,15 @@ public class gride : MonoBehaviour
     }
     public NodeScript NodefromWorldPoint(Vector3 worldPos) // getting the position of the current node aka player node
     {
-        //float percentx = (worldPos.x + Worldsize.x /2) / Worldsize.x;
-       // float percentz = (worldPos.z + Worldsize.y/2) / Worldsize.y;
-       // percentx = Mathf.Clamp01(percentx); // clamping an nomralising the position. 
-       // percentz = Mathf.Clamp01(percentz);
 
-        int x = (int)worldPos.x;  
-       // int x = Mathf.RoundToInt((GridXsize - 1) * percentx);
+
+        int x = (int)worldPos.x;
+      
         int z = (int)worldPos.z;
-       // int z = Mathf.RoundToInt((GridZsize - 1) * percentz);
-        //Debug.Log(worldPos);
+    
         return grid[x, z];
-       
-    }
 
+    }
    
 
 
@@ -137,14 +127,11 @@ public class gride : MonoBehaviour
      
         if (grid != null)
         {
-            //nodeScript startNode = NodefromWorldPoint(startPoint.position);
+          
             foreach (NodeScript n in grid)
             {
                 Gizmos.color = (n.walkable) ? Color.white : Color.red;
-                //if (startNode == n)
-               // {
-                 //   Gizmos.color = Color.green;
-               // }
+             
                 if (path != null)
                 {
                    if(path.Contains(n))

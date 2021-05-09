@@ -120,30 +120,12 @@ public class pathfinding : MonoBehaviour
             openSet.Remove(currentNode); // when you move to the next node taske the cuuent node out of the open list so we cant go back to it 
             closeSet.Add(currentNode); // add to the closed list so we know its been tested;
 
-            //if(currentNode == targetnode) // if we have hit out target then we are complete and leave the loop
-            //{
-
-            //    reTracePath(startnode, targetnode);
-
-            //    return;
-            //}
-
-            //if (currentNode == MidPointnode)
-            //{
-            //    reTracePath(startnode, MidPointnode);
-            //    Debug.Log(targetnode.worldPos);
-            //    targetnode = startnode;
-            //    startnode = MidPointnode;
-            //    Debug.Log(targetnode.worldPos);
-            //    return;
-            //    //reTracePath(MidPointnode, targetnode);
-            //}
-
+        
             if (currentNode == targetnode) // if we have hit out target then we are complete and leave the loop
             {
-                Debug.Log("end hit");
+      
                 reTracePath(startnode, targetnode);
-                //startnode = targetnode;
+      
                 return;
             }
 
@@ -184,7 +166,7 @@ public class pathfinding : MonoBehaviour
                     }
                   
                     int newMovementCostToNeighb = currentNode.gCost + getDistance(currentNode, Neighbour);
-                    if (newMovementCostToNeighb < Neighbour.gCost || !openSet.Contains(Neighbour))// && currentNode.worldPos.y! < currentNode.parent.worldPos.y) // checking to see if the nieghbour has a shorter path then the others or that it is not in the open list
+                    if (newMovementCostToNeighb < Neighbour.gCost || !openSet.Contains(Neighbour)) // checking to see if the nieghbour has a shorter path then the others or that it is not in the open list
                     { // if the neighbour is shorter then set its cost to the distance it is away from the target node
                         if (Neighbour.worldPos.y < currentNode.worldPos.y  )
                         {
@@ -210,12 +192,10 @@ public class pathfinding : MonoBehaviour
             }
         }
     }
-    //somewhere above i need to create a function that chnages the cost of the neghbour is they have a higher y position
-
+   
     void reTracePath(NodeScript startnode, NodeScript endnode)
     {
         
-            //Debug.Log(path[path.Count]);
             NodeScript currentNode = endnode;
             while (currentNode != startnode)
             {
@@ -226,33 +206,7 @@ public class pathfinding : MonoBehaviour
             }
             path.Reverse();
             Grid.path = path;
-        
-        //if (CircuitTrack)
-        //{
-        //    NodeScript currentNode2 = midpoint;
-        //    while (currentNode2 != startnode)
-        //    {
-        //        path.Add(currentNode2);
-
-        //        currentNode2 = currentNode2.parent;
-        //        Debug.Log("imFat and gay");
-        //    }
-        //    path.Reverse();
-        //   Grid.path = path;
-        //    if (Mid_Hit)
-        //    {
-        //        NodeScript currentNode = startnode; // starts form the end 
-        //        while (currentNode != midpoint) //while its not the fist node 
-        //        {
-        //            path.Add(currentNode); //add the node 
-
-        //            currentNode = currentNode.parent; //make the last one the parent 
-        //            Debug.Log("imFat and gay2");
-        //        }
-        //        path.Reverse(); //then reverse it
-        //        Grid.path = path;
-        //    }
-        //}
+   
     }
     int getDistance(NodeScript a, NodeScript b)
     {
