@@ -18,11 +18,11 @@ public class pathfinding : MonoBehaviour
     public int HillMovementCostToNeighb;
     private int FlatMovementCostToNeighb;
    public List<NodeScript> path = new List<NodeScript>();
-    public bool Hilly_track;
-    public bool Quickest_track;
+    public bool Hilly_track = false;
+    public bool Quickest_track = false;
     public bool flat_track;
-    public bool straightTrack;
-    public bool CircuitTrack;
+    public bool straightTrack = false;
+    public bool CircuitTrack = false;
     public GameObject StartPoint;
     public Vector3 midPoint;
     List<Vector3> Points = new List<Vector3>();
