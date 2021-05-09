@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
 public class gride : MonoBehaviour
 {
     public LayerMask unwalkable;
@@ -11,6 +11,9 @@ public class gride : MonoBehaviour
     public NodeScript[,] grid;
     MeshGenerator MG;
     pathfinding PF;
+
+    public InputField Mheight;
+    public InputField MDepth;
     public GameObject TerrainGenerator;
     public GameObject Pathfinder;
     public int GridXsize;
@@ -40,6 +43,12 @@ public class gride : MonoBehaviour
     }
     private void Update()
     {
+      int MHieghtINT = int.Parse(Mheight.text);
+      int MDepthINT = int.Parse(MDepth.text);
+
+
+        maxHeight = MHieghtINT;
+        minDepth = MDepthINT;
         createGrid();
         Debug.Log(GridXsize);
     }

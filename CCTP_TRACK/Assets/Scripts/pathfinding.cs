@@ -1,15 +1,18 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
 public class pathfinding : MonoBehaviour
 {
+    public Canvas StartMenu;
     gride Grid;
     MeshGenerator MS;
+    public InputField HillAmountINPUT;
     public Transform seeker;
         public  Transform Target;
     public GameObject MeshG;
     public NodeScript Neighbour;
+    public bool generated;
     public NodeScript currentNode;
     private Vector3 TrackRot;
     public int Retries = 0;
@@ -47,24 +50,41 @@ public class pathfinding : MonoBehaviour
     }
     void Update()
     {
+        int hillAmountInt = int.Parse(HillAmountINPUT.text);
+        Hill_Amount = hillAmountInt;
         ///  findpath(MS.startPoint, MS.MidPoint);//
         //  findpath(MS.MidPoint, MS.Otherpoint);//
         // findpath(MS.Otherpoint, MS.Endpoint);// Make a function that loops through and store the points rather than calling the function a set amount of times
         // findpath(MS.Endpoint, MS.startPoint);//
       
         retry_track();
-
-        for (int i = 0; i < 4; i++)
-        {
-            if (TracksBuilt != 4)
-            {
-                ToNextPoint(Points[i], Points[i + 1]);
-                TracksBuilt++;
-            }
-        }
+       
+          
+        
         // Debug.Log("seker" + seeker.position);
     }
- 
+    public void Generator()
+    {
+        if (CircuitTrack)
+        {
+
+            for (int i = 0; i < 4; i++)
+            {
+                if (TracksBuilt != 4)
+                {
+                    ToNextPoint(Points[i], Points[i + 1]);
+                    TracksBuilt++;
+                }
+            }
+        }
+        if(straightTrack)
+        {
+            findpath(MS.startPoint, MS.Endpoint);
+        }
+        StartMenu.gameObject.SetActive(false);
+        Cursor.lockState = CursorLockMode.Locked;
+    }
+
     void ToNextPoint(Vector3 Currentpoint, Vector3 NextPoint)
     {
         //for(int i = 0; i< 4; i++)
@@ -194,8 +214,7 @@ public class pathfinding : MonoBehaviour
 
     void reTracePath(NodeScript startnode, NodeScript endnode)
     {
-        if (straightTrack)
-        {
+        
             //Debug.Log(path[path.Count]);
             NodeScript currentNode = endnode;
             while (currentNode != startnode)
@@ -207,7 +226,7 @@ public class pathfinding : MonoBehaviour
             }
             path.Reverse();
             Grid.path = path;
-        }
+        
         //if (CircuitTrack)
         //{
         //    NodeScript currentNode2 = midpoint;

@@ -25,7 +25,7 @@ public class ChooseCircuitorStriaght : MonoBehaviour
     }
     public void Straight()
     {
-        PS.straightTrack = false;
+        PS.straightTrack = true;
         PS.CircuitTrack = false;
     }
 }
