@@ -21,7 +21,7 @@ public class MeshGenerator : MonoBehaviour
     public float HeightAcrossZ;
     public float multiplyHeight;
 
-    gride GS;
+    grid GS;
     public GameObject Gride;
     public Color[] colorMap;
 
@@ -50,7 +50,7 @@ public class MeshGenerator : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        GS = Gride.gameObject.GetComponent<gride>();
+        GS = Gride.gameObject.GetComponent<grid>();
         for (int i = 0; i < VertIsies.Length; i++)
         {
             VertHeight = LandMesh.vertices[i].y;
@@ -90,8 +90,12 @@ public class MeshGenerator : MonoBehaviour
         int zPos1 = Random.Range(1, 100);
         int xPos1 = Random.Range(1, 100);
       
+
+        // setting the points for the circuit track
+
+
         startPoint = new Vector3(VertIsies[30].x, 0, VertIsies[30].z); // adding 20 spaces onto the z vector
-        Endpoint = new Vector3(VertIsies[150].x, 0, 0);
+        Endpoint = new Vector3(VertIsies[150].x, 0, 0); 
         MidPoint = new Vector3(VertIsies[100].x, 0, VertIsies[100].y);
         Otherpoint = new Vector3(VertIsies[60].x, 0, VertIsies[60].y); // make the position a verticie
 
@@ -178,7 +182,7 @@ public class MeshGenerator : MonoBehaviour
     
     }
 
-    float CalculateMultiNoise(float x, float z)
+    float CalculateMultiNoise(float x, float z) // used to calculate the perlin noise used to change the hieght of each vertex 
     {
       
             float[] OctaveFreq = new float[] { Freq_1, Freq_2, Freq_3 };

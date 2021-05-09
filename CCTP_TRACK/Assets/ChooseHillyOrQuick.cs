@@ -18,14 +18,14 @@ public class ChooseHillyOrQuick : MonoBehaviour
         
     }
 
-    public void Hill()
+    public void Hill() // if button is pressed to select hill
     {
-        PS.Hilly_track = true;
-        PS.Quickest_track = false;
+        PS.hillyTrack = true; // set the hilly track to true 
+        PS.quickestTrack = false; // set the quick track to false
     }
     public void Quick()
     {
-        PS.Quickest_track = true;
-        PS.Hilly_track = false;
+        PS.quickestTrack = true;
+        PS.hillyTrack = false;
     }
 }

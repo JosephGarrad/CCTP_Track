@@ -7,7 +7,7 @@ public class TrackBuilder :  MonoBehaviour
     MeshGenerator MG;
     public GameObject Track;
     public GameObject TerrainGenerator;
-    gride GD;
+    grid GD;
     public GameObject GridScript;
     public GameObject Pathfinding;
     pathfinding PS;
@@ -17,7 +17,7 @@ public class TrackBuilder :  MonoBehaviour
    public bool Built = false;
     float m_AngleX;
     public GameObject rTrack;
-    gride Grid;
+   
 
     ChangeTextureToRoad CTTR;
     public GameObject Trackchnager;
@@ -34,12 +34,11 @@ public class TrackBuilder :  MonoBehaviour
     void Start()
     {
         MG = TerrainGenerator.gameObject.GetComponent<MeshGenerator>();
-        GD = GridScript.gameObject.GetComponent<gride>();
+        GD = GridScript.gameObject.GetComponent<grid>();
         PS = Pathfinding.gameObject.GetComponent<pathfinding>();
         CTTR = Trackchnager.gameObject.GetComponent<ChangeTextureToRoad>();
  
-        Grid = GetComponent<gride>();
-       
+ 
     }
 
     // Update is called once per frame
@@ -60,11 +59,11 @@ public class TrackBuilder :  MonoBehaviour
    void build()
    {
         
-            foreach (NodeScript n in GD.path)
+            foreach (NodeScript n in GD.path) // foreach path node in the grid
             {
                 if (GD.path.Contains(n) )
                 {
-                rTrack = Instantiate(Cube,new Vector3(n.worldPos.x,n.worldPos.y,n.worldPos.z), Quaternion.identity);
+                rTrack = Instantiate(Cube,new Vector3(n.worldPos.x,n.worldPos.y,n.worldPos.z), Quaternion.identity); // create a cube at the position of each track node
                 TrackPeices.Add(rTrack);
                 rTrack.name = ("Track");
 
@@ -81,7 +80,7 @@ public class TrackBuilder :  MonoBehaviour
         endpeice =TrackPeices.Count;
     
     }
-    void rotate()
+    void rotate() // uses this function to roate each peice to face the next one in the list 
     {
         for (int i = 0; i < TrackPeices.Count; i++)
         {
@@ -91,7 +90,7 @@ public class TrackBuilder :  MonoBehaviour
 
         }
     }
-    void stretch()
+    void stretch() // use this function to stretch each peice to fit into the gap between the cube infront and behind
     {
        
 

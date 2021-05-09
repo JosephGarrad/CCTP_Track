@@ -5,7 +5,7 @@ using UnityEngine.UI;
 public class pathfinding : MonoBehaviour
 {
     public Canvas StartMenu;
-    gride Grid;
+    grid Grid;
     MeshGenerator MS;
     public InputField HillAmountINPUT;
     public Transform seeker;
@@ -16,31 +16,31 @@ public class pathfinding : MonoBehaviour
     public NodeScript currentNode;
     private Vector3 TrackRot;
     public int Retries = 0;
-    public int Hill_Amount;
+    public int hillAmount;
     List<NodeScript > oldtrack = new List<NodeScript>();
     public int HillMovementCostToNeighb;
     private int FlatMovementCostToNeighb;
    public List<NodeScript> path = new List<NodeScript>();
-    public bool Hilly_track = false;
-    public bool Quickest_track = false;
-    public bool flat_track;
+    public bool hillyTrack = false;
+    public bool quickestTrack = false;
+    public bool flatTrack;
     public bool straightTrack = false;
-    public bool CircuitTrack = false;
+    public bool circuitTrack = false;
     public GameObject StartPoint;
     public Vector3 midPoint;
     List<Vector3> Points = new List<Vector3>();
-    List<NodeScript> allnodes = new List<NodeScript>();
-    public bool Mid_Hit;
-    private int TracksBuilt = 0;
+    List<NodeScript> allNodes = new List<NodeScript>();
+    public bool midHit;
+    private int tracksBuilt = 0;
     private void Awake()
     {
-        Grid = GetComponent<gride>(); //getting the gride script
+        Grid = GetComponent<grid>(); //getting the gride script
         MS = MeshG.gameObject.GetComponent<MeshGenerator>();
     }
     private void Start()
     {
        
-        Points.Add(MS.startPoint);
+        Points.Add(MS.startPoint); // adding the points that go into the circuit to a new list
         Points.Add(MS.MidPoint);
         Points.Add(MS.Otherpoint);
         Points.Add(MS.Endpoint);
@@ -50,53 +50,42 @@ public class pathfinding : MonoBehaviour
     }
     void Update()
     {
-        int hillAmountInt = int.Parse(HillAmountINPUT.text);
-        Hill_Amount = hillAmountInt;
-        ///  findpath(MS.startPoint, MS.MidPoint);//
-        //  findpath(MS.MidPoint, MS.Otherpoint);//
-        // findpath(MS.Otherpoint, MS.Endpoint);// Make a function that loops through and store the points rather than calling the function a set amount of times
-        // findpath(MS.Endpoint, MS.startPoint);//
+  
+
       
         retry_track();
-       
-          
-        
-        // Debug.Log("seker" + seeker.position);
+
     }
     public void Generator()
     {
-        if (CircuitTrack)
+        if (circuitTrack) // if circuit track is choosen then this is executed 
         {
 
-            for (int i = 0; i < 4; i++)
+            for (int i = 0; i < 4; i++) // loops through all points in the circuit
             {
-                if (TracksBuilt != 4)
+                if (tracksBuilt != 4)
                 {
-                    ToNextPoint(Points[i], Points[i + 1]);
-                    TracksBuilt++;
+                    ToNextPoint(Points[i], Points[i + 1]); // creates a path between the two current points
+                    tracksBuilt++;
                 }
             }
         }
-        if(straightTrack)
+        if(straightTrack) // if straight track is choosen then this is executed.
         {
-            findpath(MS.startPoint, MS.Endpoint);
+            findpath(MS.startPoint, MS.Endpoint); // as a straight path is only created between between the start and end point.
         }
         StartMenu.gameObject.SetActive(false);
         Cursor.lockState = CursorLockMode.Locked;
     }
 
-    void ToNextPoint(Vector3 Currentpoint, Vector3 NextPoint)
+    void ToNextPoint(Vector3 Currentpoint, Vector3 NextPoint) // called when a circuit track is created
     {
-        //for(int i = 0; i< 4; i++)
-        //{
-           // Currentpoint = Points[i];
-           // NextPoint = Points[i + 1];
-           
-            findpath(Currentpoint, NextPoint);
+
+            findpath(Currentpoint, NextPoint); 
    
-        //}
+     
     }
-    void findpath(Vector3 startPos, Vector3 targetpos)
+    void findpath(Vector3 startPos, Vector3 targetpos) // used to find the path between two points
     {
         NodeScript startnode = Grid.NodefromWorldPoint(startPos);
         NodeScript targetnode = Grid.NodefromWorldPoint(targetpos);
@@ -110,12 +99,12 @@ public class pathfinding : MonoBehaviour
             NodeScript currentNode = openSet[0];
             for(int i = 1; i < openSet.Count; i++)
             {
-                if (Retries == 0 && openSet[i].fcost < currentNode.fcost || openSet[i].fcost == currentNode.fcost && openSet[i].hCost < currentNode.hCost )//&& !allnodes.Contains(currentNode)) // checking to see if the next node has a lower cost, if it does make it the current node
+                if (Retries == 0 && openSet[i].fcost < currentNode.fcost || openSet[i].fcost == currentNode.fcost && openSet[i].hCost < currentNode.hCost ) // checking to see if the next node has a lower cost, if it does make it the current node
                 {
                     currentNode = openSet[i];
                    
                 }
-                allnodes.Add(currentNode);
+                allNodes.Add(currentNode);
             }
             openSet.Remove(currentNode); // when you move to the next node taske the cuuent node out of the open list so we cant go back to it 
             closeSet.Add(currentNode); // add to the closed list so we know its been tested;
@@ -130,11 +119,11 @@ public class pathfinding : MonoBehaviour
             }
 
 
-            if (Quickest_track)
+            if (quickestTrack)
             {
                 foreach (NodeScript Neighbour in Grid.GetNeighbours(currentNode))
                 {
-                    if ( !Neighbour.walkable || closeSet.Contains(Neighbour)|| allnodes.Contains(Neighbour))
+                    if ( !Neighbour.walkable || closeSet.Contains(Neighbour)|| allNodes.Contains(Neighbour))
                     {
                         continue;
                     }
@@ -153,7 +142,7 @@ public class pathfinding : MonoBehaviour
 
                 }
             }
-            if (Hilly_track)
+            if (hillyTrack)
             {
                 
                 foreach (NodeScript Neighbour in Grid.GetNeighbours(currentNode))
@@ -170,7 +159,7 @@ public class pathfinding : MonoBehaviour
                     { // if the neighbour is shorter then set its cost to the distance it is away from the target node
                         if (Neighbour.worldPos.y < currentNode.worldPos.y  )
                         {
-                            currentNode.gCost += Hill_Amount;
+                            currentNode.gCost += hillAmount;
                             HillMovementCostToNeighb = currentNode.gCost + getDistance(currentNode, Neighbour);
                             Neighbour.gCost = HillMovementCostToNeighb;
                         }
@@ -193,7 +182,7 @@ public class pathfinding : MonoBehaviour
         }
     }
    
-    void reTracePath(NodeScript startnode, NodeScript endnode)
+    void reTracePath(NodeScript startnode, NodeScript endnode) // retraces the path that has been created
     {
         
             NodeScript currentNode = endnode;

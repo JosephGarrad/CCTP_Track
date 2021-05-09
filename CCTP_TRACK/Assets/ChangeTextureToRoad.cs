@@ -9,34 +9,21 @@ public class ChangeTextureToRoad : MonoBehaviour
     public int Radius = 10;
     TrackBuilder TB;
     public GameObject TBS;
-    gride GD;
+    grid GD;
     private int Tracknum;
     public GameObject GridScript;
     void Start()
     {
-        GD = GridScript.gameObject.GetComponent<gride>();
+        GD = GridScript.gameObject.GetComponent<grid>();
         TB = TBS.gameObject.GetComponent<TrackBuilder>();
-        // Get the material
+    
        Mat = GetComponent<Renderer>().material;
-        // Get the player object
-       
+
     }
 
     void Update()
     {
 
-        // Mat.SetFloat("_NumOfPeices", TB.TrackPeices.Count);
-
-
-        //        // Set the player position in the shader file
-        //        foreach (var tr in TB.TrackPeices)
-        //{
-
-        //}
-        //  Player = GameObject.FindGameObjectsWithTag("Track");
-        //  Debug.Log(Player.Length);
-
-        // Set the distance or radius
        
             createDirtTrack();
         
@@ -45,23 +32,15 @@ public class ChangeTextureToRoad : MonoBehaviour
     {
         foreach (NodeScript n in GD.path)
         {
-            if (GD.path.Contains(n))
+            if (GD.path.Contains(n)) // if the grid contains a path
             {
-               // Material Mat = new Material(GetComponent<Renderer>().material);
-                //GetComponent<Renderer>().material = Mat;
 
-                Mat.SetVector("_NodePos", n.worldPos);
+
+                Mat.SetVector("_NodePos", n.worldPos); // get the path nodes position and set the nodePose vector to it 
                 Mat.SetFloat("_Dist", Radius);
             }
         
         }
-      
-        //for (int i = 0; i <= Player.Length; i++)
-        //{
-        //    Debug.Log(i);
-        //    Mat.SetVector("_PlayerPos", Player[i].gameObject.transform.position);
-        //    Mat.SetFloat("_Dist", Radius);
 
-        //}
     }
 }

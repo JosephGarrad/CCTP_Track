@@ -2,16 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-public class gride : MonoBehaviour
+public class grid : MonoBehaviour
 {
     public LayerMask unwalkable;
 
     public Vector3 Worldsize;
     float nodeDiam;
-    public NodeScript[,] grid;
+    public NodeScript[,] Grid;
     MeshGenerator MG;
     pathfinding PF;
-    public bool gridmade;
+    public bool gridMade;
     public InputField Mheight;
     public InputField MDepth;
     public GameObject TerrainGenerator;
@@ -20,8 +20,8 @@ public class gride : MonoBehaviour
     public int GridZsize;
     public int GridHeight;
     public float VerticiesRadius;
-    bool walkable;
-    private int Tracksize = 1;
+    private bool walkable;
+    private int TrackSize = 1;
     public GameObject Block;
     public Vector3 worldpoint;
     public int maxHeight;
@@ -49,37 +49,37 @@ public class gride : MonoBehaviour
         createGrid();
         
     }
-    public void createGrid()
+    public void createGrid() // used to create the grid for the A* pathfinding
 
     {
        
-        grid = new NodeScript[GridXsize, GridZsize];
-        Vector3 BottomLeft = transform.position - Vector3.right * Worldsize.x / 2 - Vector3.forward * Worldsize.z / 2;
+        Grid = new NodeScript[GridXsize, GridZsize];
+       
         for (int i = 0; i < MG.VertIsies.Length; i++)
         {
            
         }
-        for (int i = 0, x = 0; x < GridXsize;x++)
+        for (int i = 0, x = 0; x < GridXsize;x++) // loops through the size of the terrain
         {
             
 
             for (int  z = 0; z < GridZsize; z++)
             {
                
-                Vector3 worldpoint = new Vector3(MG.VertIsies[i].x, MG.VertIsies[i].y, MG.VertIsies[i].z);
+                Vector3 worldPoint = new Vector3(MG.VertIsies[i].x, MG.VertIsies[i].y, MG.VertIsies[i].z); //sets the current nodes position to the position of the verticies
                 if (MG.VertIsies[i].y >= maxHeight || MG.VertIsies[i].y <= minDepth)  
                {
                 Instantiate(Block, MG.VertIsies[i], Quaternion.identity);
                 }
-                float PosX = x * Tracksize;
-                float posZ = z * -Tracksize;
-                walkable = !(Physics.CheckSphere(worldpoint, VerticiesRadius, unwalkable));
-                    grid[x, z] = new NodeScript(walkable, worldpoint, x, z);
+                float PosX = x * TrackSize;
+                float posZ = z * -TrackSize;
+                walkable = !(Physics.CheckSphere(worldPoint, VerticiesRadius, unwalkable));
+                    Grid[x, z] = new NodeScript(walkable, worldPoint, x, z);
                     i++;
                
             }
         }
-        gridmade = true;
+        gridMade = true;
     }
 
 
@@ -100,7 +100,7 @@ public class gride : MonoBehaviour
                 int checkZ = Node.GridY + z;
                 if (checkX >= 0 && checkX < GridXsize && checkZ >= 0 && checkZ < GridZsize)
                 {
-                    neighbours.Add(grid[checkZ, checkX]);
+                    neighbours.Add(Grid[checkZ, checkX]);
                 }
             }
         }
@@ -115,7 +115,7 @@ public class gride : MonoBehaviour
       
         int z = (int)worldPos.z;
     
-        return grid[x, z];
+        return Grid[x, z];
 
     }
    
@@ -125,12 +125,12 @@ public class gride : MonoBehaviour
     private void OnDrawGizmos()
     {
      
-        if (grid != null)
+        if (Grid != null)
         {
           
-            foreach (NodeScript n in grid)
+            foreach (NodeScript n in Grid) // for each path node
             {
-                Gizmos.color = (n.walkable) ? Color.white : Color.red;
+                Gizmos.color = (n.walkable) ? Color.white : Color.red; // set its colour to black if it is a path node, if it cant be accessed set its colour to red
              
                 if (path != null)
                 {
