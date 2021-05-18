@@ -6,6 +6,8 @@ public class pathfinding : MonoBehaviour
 {
     public Canvas StartMenu;
     grid Grid;
+    CamController CC;
+    public GameObject CCobject;
     MeshGenerator MS;
     public InputField HillAmountINPUT;
     public Transform seeker;
@@ -36,6 +38,7 @@ public class pathfinding : MonoBehaviour
     {
         Grid = GetComponent<grid>(); //getting the gride script
         MS = MeshG.gameObject.GetComponent<MeshGenerator>();
+        CC = CCobject.gameObject.GetComponent<CamController>();
     }
     private void Start()
     {
@@ -58,6 +61,7 @@ public class pathfinding : MonoBehaviour
     }
     public void Generator()
     {
+       
         if (circuitTrack) // if circuit track is choosen then this is executed 
         {
 
@@ -76,6 +80,7 @@ public class pathfinding : MonoBehaviour
         }
         StartMenu.gameObject.SetActive(false);
         Cursor.lockState = CursorLockMode.Locked;
+        CC.Started = true;
     }
 
     void ToNextPoint(Vector3 Currentpoint, Vector3 NextPoint) // called when a circuit track is created

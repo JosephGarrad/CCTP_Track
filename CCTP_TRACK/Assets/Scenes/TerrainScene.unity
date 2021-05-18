@@ -2205,6 +2205,7 @@ MonoBehaviour:
   normalMoveSpeed: 10
   slowMoveFactor: 0.25
   fastMoveFactor: 3
+  Started: 0
 --- !u!1 &1061217127 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6985845728111697568, guid: 122d1c3addbc688469ad0d43fe4d8d30, type: 3}
@@ -3730,6 +3731,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   StartMenu: {fileID: 1774763600}
+  CCobject: {fileID: 963194225}
   HillAmountINPUT: {fileID: 1146705607}
   seeker: {fileID: 0}
   Target: {fileID: 0}

@@ -12,13 +12,14 @@ public class ChangeTextureToRoad : MonoBehaviour
     grid GD;
     private int Tracknum;
     public GameObject GridScript;
+    Vector3[] array;
     void Start()
     {
         GD = GridScript.gameObject.GetComponent<grid>();
         TB = TBS.gameObject.GetComponent<TrackBuilder>();
     
        Mat = GetComponent<Renderer>().material;
-
+        
     }
 
     void Update()
@@ -26,7 +27,7 @@ public class ChangeTextureToRoad : MonoBehaviour
 
        
             createDirtTrack();
-        
+        Mat.SetInt("Count", GD.path.Count);
     }
    public void createDirtTrack()
     {
@@ -34,7 +35,7 @@ public class ChangeTextureToRoad : MonoBehaviour
         {
             if (GD.path.Contains(n)) // if the grid contains a path
             {
-
+              
 
                 Mat.SetVector("_NodePos", n.worldPos); // get the path nodes position and set the nodePose vector to it 
                 Mat.SetFloat("_Dist", Radius);

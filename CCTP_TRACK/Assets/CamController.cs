@@ -11,18 +11,21 @@ public class CamController : MonoBehaviour
         public float normalMoveSpeed = 10;
         public float slowMoveFactor = 0.25f;
         public float fastMoveFactor = 3;
-
+    public bool Started;
         private float rotationX = 0.0f;
         private float rotationY = 0.0f;
 
         void Start()
         {
-           
+        rotationX = 180f;
         }
 
         private void Update()
         {
+        if (Started)
+        {
             Movement();
+        }
         }
 
         void Movement()

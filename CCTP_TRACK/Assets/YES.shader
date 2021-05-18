@@ -39,15 +39,18 @@ Shader "Unlit/YES"
             }
             uniform float4 _Color;
             float4 _NodePos;
+            float4 _poses[1000];
+            int Count = 0;
             sampler2D _MainTex;
             sampler2D _SecondayTex;
             float _Dist;
            float _NumOfPeices;
            float _isdone;
+
            fixed4 frag(v2f i) : SV_Target
            {
                // Depending on the distance from the player, we use a different texture
-             
+         
                 if (distance(_NodePos.xyz, i.worldPos.xyz) < _Dist)
                 {
 
@@ -55,9 +58,9 @@ Shader "Unlit/YES"
                 }
                  else
                      return tex2D(_MainTex, i.uv);
-                   
-               
-            }
+
+               }
+          
 
             ENDCG
         }
